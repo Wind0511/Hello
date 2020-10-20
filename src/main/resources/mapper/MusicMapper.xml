@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wind.server.mapper.MusicMapper">
+	
+<!--	<select id="queryList" resultType="com.qdu.questionnaires.beans.User">-->
+<!--	SELECT  *-->
+<!--	FROM user-->
+<!--	</select>-->
+
+	<select id="getSinger" resultType="java.lang.String">
+	SELECT singer
+	FROM list WHERE id = #{id}
+	</select>
+
+<!--	<select id="Check" resultType="java.lang.Integer">-->
+<!--	SELECT COUNT(*)-->
+<!--	FROM user-->
+<!--	WHERE name  = #{name}-->
+<!--	</select>-->
+<!--	<insert id="insertUser">-->
+<!--	insert into-->
+<!--		user(name,pass)-->
+<!--	value-->
+<!--		(#{name},#{pass})-->
+<!--	</insert>-->
+
+</mapper>
+
+
+

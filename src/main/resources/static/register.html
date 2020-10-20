@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
@@ -13,38 +12,27 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
 <!--    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>-->
-    <link rel="stylesheet" th:href="@{/login/css/style.css}"><!-- href="../static/login/css/style.css"-->
+    <link rel="stylesheet" href="/css/style.css"><!-- href="../static/login/css/style.css"-->
 
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
-    <script th:src="@{/login/js/index.js}"></script>
-    <script th:inline="javascript">
+    <script src="js/index.js"></script>
+<!--    <script th:src="@{/util/musicApi-master/src/music-api}"></script>-->
+    <script>
 
         function lo() {
 
             $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
         }
 
-            function checkPass() {
-                var a = $('#p2').val()
-                var b = $('#p1').val();
-
-                if (a == b) {
-                    $('#again').html("<div class='message' hidden='hidden' style='font-size: 4px;'>输入正确</div>");
-                } else {
-                    $('#again').html("<div class='message' style='font-size: 4px; color: red'>两次输入的内容不同</div>")
-                }
-            }
 
             function nameCheck() {
-                var name = $('#name').serialize();
+                var name = $('#pass').serialize();
                 //alert(name);
                 $.ajax({
                     url: "/namecheck",
                     type: "POST",
                     data: name,
                     success: function (res) {
-                        //alert(res);</
-                        // alert($('#attation').innerHTML)
                         if (res == "老铁没毛病") {
                             $('#attation').html("<div class='message' style='font-size: 4px'>" + res + "</div>");
                         } else {
@@ -66,15 +54,11 @@
 </div>
 <div class="form">
     <div class="thumbnail">
-        <img th:src="@{/login/css/hat.svg}"/>
+        <img src="css/hat.svg"/>
     </div>
-    <form class="register-form" action="#" th:action="@{/register}" method="post">
-        <input type="text" placeholder="name" id="name" name="name" onblur="nameCheck()"/>
-        <h6 id="attation" class="col-sm-pull-1" style="color: #b92c28 ;font-family: 微软雅黑 ;font-size: 3px">注意：用户名即昵称</h6>
+    <form class="register-form" action="#" action="/register" method="post">
         <br>
         <input id="p1" type="password" placeholder="password" name="pass" onblur="checkPass()"/>
-        <p></p><br>
-        <input id="p2" type="password" placeholder="again" name="again" onblur="checkPass()">
 
         <p id="again"></p>
         <p></p><br>

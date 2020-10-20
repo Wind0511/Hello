@@ -1,8 +1,8 @@
 package com.wind.server.tools;
 
 import java.security.MessageDigest;
-
-public class md5String {
+//md5加密
+public class Md5String {
     public String getMd5(String text){
         String res = null;
         try{

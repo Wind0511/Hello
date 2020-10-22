@@ -1,0 +1,19 @@
+1.网易云获取音乐api
+http://music.163.com/song/media/outer/url?id=167691.mp3
+2.网易云获取歌词api
+ http://music.163.com/api/song/lyric?os=pc&id=1359595520&lv=-1&kv=-1&tv=-1
+必要参数：
+a.id：歌曲ID
+b.lv：值为-1，搜索lyric格式
+c.kv：值为-1，意义不明
+d.tv：值为-1，是否搜索tlyric格式
+3.网易云搜索api
+https://music.163.com/api/search/get?s=大碗宽面&type=1&limit=6	
+4.根据歌曲id查询歌曲详情
+https://music.163.com/api/song/detail/?id=1359595520&ids=[1359595520]
+5.根据歌曲id查询评论
+http://music.163.com/api/v1/resource/comments/R_SO_4_1359595520
+
+6.根据mvid查询mv
+http://music.163.com/api/mv/detail?id=10879020&type=mp4
+此id为mvid

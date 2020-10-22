@@ -1,0 +1,162 @@
+{
+  "songs": [
+    {
+      "name": "Legends Never Die",
+      "id": 506196018,
+      "position": 4,
+      "alias": [
+        "传奇永不熄—英雄联盟2017全球总决赛主题曲"
+      ],
+      "status": 0,
+      "fee": 0,
+      "copyrightId": 0,
+      "disc": "01",
+      "no": 1,
+      "artists": [
+        {
+          "name": "Against the Current",
+          "id": 783418,
+          "picId": 0,
+          "img1v1Id": 0,
+          "briefDesc": "",
+          "picUrl": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "albumSize": 0,
+          "alias": [],
+          "trans": "",
+          "musicSize": 0,
+          "topicPerson": 0
+        }
+      ],
+      "album": {
+        "name": "Legends Never Die",
+        "id": 75816481,
+        "type": "EP/Single",
+        "size": 2,
+        "picId": 109951163918904060,
+        "blurPicUrl": "https://p2.music.126.net/2aTrg-Zz72Ms6ySsjPcKCg==/109951163918904060.jpg",
+        "companyId": 0,
+        "pic": 109951163918904060,
+        "picUrl": "https://p2.music.126.net/2aTrg-Zz72Ms6ySsjPcKCg==/109951163918904060.jpg",
+        "publishTime": 1506124800000,
+        "description": "",
+        "tags": "",
+        "company": "Riot",
+        "briefDesc": "",
+        "artist": {
+          "name": "",
+          "id": 0,
+          "picId": 0,
+          "img1v1Id": 0,
+          "briefDesc": "",
+          "picUrl": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "albumSize": 0,
+          "alias": [],
+          "trans": "",
+          "musicSize": 0,
+          "topicPerson": 0
+        },
+        "songs": [],
+        "alias": [
+          "传奇永不熄—英雄联盟2017全球总决赛主题曲"
+        ],
+        "status": 0,
+        "copyrightId": 0,
+        "commentThreadId": "R_AL_3_75816481",
+        "artists": [
+          {
+            "name": "英雄联盟",
+            "id": 1047337,
+            "picId": 0,
+            "img1v1Id": 0,
+            "briefDesc": "",
+            "picUrl": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "albumSize": 0,
+            "alias": [],
+            "trans": "",
+            "musicSize": 0,
+            "topicPerson": 0
+          }
+        ],
+        "subType": "录音室版",
+        "transName": null,
+        "mark": 0,
+        "picId_str": "109951163918904060"
+      },
+      "starred": false,
+      "popularity": 100.0,
+      "score": 100,
+      "starredNum": 0,
+      "duration": 235052,
+      "playedNum": 0,
+      "dayPlays": 0,
+      "hearTime": 0,
+      "ringtone": null,
+      "crbt": null,
+      "audition": null,
+      "copyFrom": "",
+      "commentThreadId": "R_SO_4_506196018",
+      "rtUrl": null,
+      "ftype": 0,
+      "rtUrls": [],
+      "copyright": 2,
+      "transName": null,
+      "sign": null,
+      "mark": 0,
+      "single": 0,
+      "noCopyrightRcmd": null,
+      "hMusic": {
+        "name": null,
+        "id": 1357439179,
+        "size": 9404125,
+        "extension": "mp3",
+        "sr": 44100,
+        "dfsId": 0,
+        "bitrate": 320000,
+        "playTime": 235052,
+        "volumeDelta": -29000.0
+      },
+      "mMusic": {
+        "name": null,
+        "id": 1357439180,
+        "size": 5642493,
+        "extension": "mp3",
+        "sr": 44100,
+        "dfsId": 0,
+        "bitrate": 192000,
+        "playTime": 235052,
+        "volumeDelta": -26700.0
+      },
+      "lMusic": {
+        "name": null,
+        "id": 1357439181,
+        "size": 3761676,
+        "extension": "mp3",
+        "sr": 44100,
+        "dfsId": 0,
+        "bitrate": 128000,
+        "playTime": 235052,
+        "volumeDelta": -25500.0
+      },
+      "bMusic": {
+        "name": null,
+        "id": 1357439181,
+        "size": 3761676,
+        "extension": "mp3",
+        "sr": 44100,
+        "dfsId": 0,
+        "bitrate": 128000,
+        "playTime": 235052,
+        "volumeDelta": -25500.0
+      },
+      "mvid": 10897261,
+      "mp3Url": null,
+      "rtype": 0,
+      "rurl": null
+    }
+  ],
+  "equalizers": {},
+  "code": 200
+}

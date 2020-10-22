@@ -1,0 +1,305 @@
+{
+  "result": {
+    "songs": [
+      {
+        "id": 506196018,
+        "name": "Legends Never Die",
+        "artists": [
+          {
+            "id": 783418,
+            "name": "Against the Current",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          }
+        ],
+        "album": {
+          "id": 75816481,
+          "name": "Legends Never Die",
+          "artist": {
+            "id": 0,
+            "name": "",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          },
+          "publishTime": 1506124800000,
+          "size": 2,
+          "copyrightId": 0,
+          "status": 0,
+          "picId": 109951163918904060,
+          "alia": [
+            "传奇永不熄—英雄联盟2017全球总决赛主题曲"
+          ],
+          "mark": 0
+        },
+        "duration": 235052,
+        "copyrightId": 0,
+        "status": 0,
+        "alias": [
+          "传奇永不熄—英雄联盟2017全球总决赛主题曲"
+        ],
+        "rtype": 0,
+        "ftype": 0,
+        "mvid": 10897261,
+        "fee": 0,
+        "rUrl": null,
+        "alias": [
+          "传奇永不熄—英雄联盟2017全球总决赛主题曲"
+        ],
+        "mark": 262144
+      },
+      {
+        "id": 1328555928,
+        "name": "Legend Never Die",
+        "artists": [
+          {
+            "id": 155882,
+            "name": "Malik Adouane",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          }
+        ],
+        "album": {
+          "id": 74600072,
+          "name": "Cardini Street",
+          "artist": {
+            "id": 0,
+            "name": "",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          },
+          "publishTime": 1478534400007,
+          "size": 0,
+          "copyrightId": 405025,
+          "status": 3,
+          "picId": 109951163687386585,
+          "mark": 0
+        },
+        "duration": 290160,
+        "copyrightId": 405025,
+        "status": 0,
+        "alias": [],
+        "rtype": 0,
+        "ftype": 0,
+        "mvid": 0,
+        "fee": 8,
+        "rUrl": null,
+        "mark": 262144
+      },
+      {
+        "id": 1457512506,
+        "name": "Legend never dies.by vince（翻自 英雄联盟）",
+        "artists": [
+          {
+            "id": 35603687,
+            "name": "鎏少贤",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          }
+        ],
+        "album": {
+          "id": 91070838,
+          "name": "钢琴曲",
+          "artist": {
+            "id": 0,
+            "name": "",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          },
+          "publishTime": 1592694202425,
+          "size": 4,
+          "copyrightId": 0,
+          "status": 0,
+          "picId": 109951165077933613,
+          "mark": 0
+        },
+        "duration": 126400,
+        "copyrightId": 0,
+        "status": 0,
+        "alias": [],
+        "rtype": 0,
+        "ftype": 0,
+        "mvid": 0,
+        "fee": 0,
+        "rUrl": null,
+        "mark": 131200
+      },
+      {
+        "id": 1349786581,
+        "name": "英雄联盟-Legend Never Die（CRAT remix）",
+        "artists": [
+          {
+            "id": 12344942,
+            "name": "CRAT",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          }
+        ],
+        "album": {
+          "id": 75728498,
+          "name": "Legend Never Die",
+          "artist": {
+            "id": 0,
+            "name": "",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          },
+          "publishTime": 1551611386507,
+          "size": 1,
+          "copyrightId": 0,
+          "status": 0,
+          "picId": 109951163901435288,
+          "mark": 0
+        },
+        "duration": 233142,
+        "copyrightId": 0,
+        "status": 0,
+        "alias": [],
+        "rtype": 0,
+        "ftype": 0,
+        "mvid": 0,
+        "fee": 0,
+        "rUrl": null,
+        "mark": 0
+      },
+      {
+        "id": 1469981383,
+        "name": "Legend Never Die",
+        "artists": [
+          {
+            "id": 36365805,
+            "name": "Mint Media Studio",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          }
+        ],
+        "album": {
+          "id": 93757861,
+          "name": "Say Goodbye",
+          "artist": {
+            "id": 0,
+            "name": "",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          },
+          "publishTime": 1596211200000,
+          "size": 0,
+          "copyrightId": 743010,
+          "status": 1,
+          "picId": 109951165223349963,
+          "mark": 0
+        },
+        "duration": 179182,
+        "copyrightId": 743010,
+        "status": 0,
+        "alias": [],
+        "rtype": 0,
+        "ftype": 0,
+        "mvid": 0,
+        "fee": 8,
+        "rUrl": null,
+        "mark": 270464
+      },
+      {
+        "id": 1444928515,
+        "name": "Legend Never Die",
+        "artists": [
+          {
+            "id": 35044164,
+            "name": "orochi kupa",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          }
+        ],
+        "album": {
+          "id": 88830484,
+          "name": "The Lord - EP",
+          "artist": {
+            "id": 0,
+            "name": "",
+            "picUrl": null,
+            "alias": [],
+            "albumSize": 0,
+            "picId": 0,
+            "img1v1Url": "https://p2.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+            "img1v1": 0,
+            "trans": null
+          },
+          "publishTime": 1522944000000,
+          "size": 5,
+          "copyrightId": 1416729,
+          "status": 1,
+          "picId": 109951164953259450,
+          "mark": 0
+        },
+        "duration": 243946,
+        "copyrightId": 1416729,
+        "status": 0,
+        "alias": [],
+        "rtype": 0,
+        "ftype": 0,
+        "mvid": 0,
+        "fee": 8,
+        "rUrl": null,
+        "mark": 1318912
+      }
+    ],
+    "hasMore": true,
+    "songCount": 600
+  },
+  "code": 200
+}

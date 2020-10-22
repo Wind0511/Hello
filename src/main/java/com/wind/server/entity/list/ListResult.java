@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ListResult {
     String name;
-    int id;
+    long id;
     String coverImgUrl;
     List<Songs> tracks;
 
@@ -18,11 +18,11 @@ public class ListResult {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

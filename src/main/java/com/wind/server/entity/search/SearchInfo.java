@@ -1,12 +1,12 @@
 package com.wind.server.entity.search;
 
 public class SearchInfo {
-    int songId;
-    String songName;
-    int albumId;
-    String albumName;
-    int singerId;
-    String singerName;
+    int songId;//歌曲id
+    String songName;//歌曲名
+    int albumId;//专辑id
+    String albumName;//专辑名
+    int singerId;//歌手id
+    String singerName;//歌手名
 
 
 

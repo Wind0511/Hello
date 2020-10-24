@@ -9,9 +9,8 @@ import java.net.URL;
 import java.util.*;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wind.server.entity.list.ListInfo;
-import com.wind.server.entity.list.ListPack;
-import com.wind.server.entity.list.ListResult;
+import com.wind.server.entity.list.*;
+import com.wind.server.entity.lrc.LrcResp;
 import com.wind.server.entity.search.SearchInfo;
 import com.wind.server.entity.search.Select;
 import com.wind.server.entity.search.SelectAlbum;
@@ -24,6 +23,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApiHelper {
     //资料爬取************************************************************************************
+    //拿取歌词
+    public String lrc(int id) throws IOException {
+        URL u = new URL("http://music.163.com/api/song/lyric?os=pc&id=" + id + "&lv=-1&kv=-1&tv=-1");
+        //获取连接对象
+        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        //连接
+        conn.connect();
+        //获取输入流shinian
+        InputStream in = conn.getInputStream();
+        //读取输入流
+        int r;
+        byte[] bs = new byte[1024];
+        StringBuffer sb = new StringBuffer();
+        while ((r = in.read(bs)) != -1) {
+            sb.append(new String(bs, 0, r));
+        }
+        in.close();
+        String Json = sb.toString();
+
+        return JSON.toJSONString(JSON.parseObject(Json, LrcResp.class));
+    }
     //搜索服务
     public String Searcher(String name,int num) throws IOException {
         URLEncodTools urlEncodTools = new URLEncodTools();
@@ -47,6 +67,29 @@ public class ApiHelper {
         String Json = sb.toString();
 
         return editRes(Json);
+    }
+    //搜索服务(歌单)
+    public String Searcher2(String name,int num) throws IOException {
+        URLEncodTools urlEncodTools = new URLEncodTools();
+        String enc = urlEncodTools.encode(name);
+        System.out.println(enc);
+        URL u = new URL("https://music.163.com/api/search/get?s=" + enc + "&type=1000&limit="+num);
+        //获取连接对象
+        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        //连接
+        conn.connect();
+        //获取输入流shinian
+        InputStream in = conn.getInputStream();
+        //读取输入流
+        int r;
+        byte[] bs = new byte[1024];
+        StringBuffer sb = new StringBuffer();
+        while ((r = in.read(bs)) != -1) {
+            sb.append(new String(bs, 0, r));
+        }
+        in.close();
+        String Json = sb.toString();
+        return JSONObject.toJSONString(JSON.parseObject(Json,ListSearchPackage.class).getResult());
     }
     //得到专辑图片
     public String getPic(int id) throws IOException {
@@ -221,6 +264,9 @@ public class ApiHelper {
         }
         return JSONObject.toJSONString(searchInfos);
     }
+    //打包歌单 搜索歌曲结果
+
+
 
     //打包专辑列表
     public String editAlbum(String Json) {

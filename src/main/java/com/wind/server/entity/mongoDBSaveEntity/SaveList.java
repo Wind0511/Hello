@@ -9,6 +9,24 @@ public class SaveList {
     List<SearchInfo> searchInfos;//统一形式的歌曲存储结构表
     String name;//歌单名称
     String pass;//编辑密码md5加密已经写好
+    Long time;
+    String inform;//预留信息，找回密码的时候用
+
+    public String getInform() {
+        return inform;
+    }
+
+    public void setInform(String inform) {
+        this.inform = inform;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
 
     public String getId() {
         return id;

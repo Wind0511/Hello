@@ -1,0 +1,24 @@
+{
+  "result": {
+    "artistCount": 1,
+    "hasMore": false,
+    "artists": [
+      {
+        "id": 30647513,
+        "name": "郭秀峣",
+        "picUrl": "https://p1.music.126.net/uE89vkmnthXUv1QVXO6-9g==/109951163655924398.jpg",
+        "alias": [],
+        "albumSize": 17,
+        "picId": 109951163655924398,
+        "img1v1Url": "https://p1.music.126.net/_9RBoXq4suT9ixVRBSto6g==/109951163655930279.jpg",
+        "accountId": 301167106,
+        "img1v1": 109951163655930279,
+        "mvSize": 2,
+        "followed": false,
+        "alg": "alg_search_precision_artist_tab_basic",
+        "trans": null
+      }
+    ]
+  },
+  "code": 200
+}

@@ -46,6 +46,17 @@ public class MainController {
         return "";
     }
 
+    @ResponseBody
+    @RequestMapping("lrc")
+    public String lrc(int id) {
+        try {
+            return search.lrc(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+    }
+
     //传入搜索内容 和 搜索条数（歌手专辑歌曲名均可）默认返回搜索内容前50 Json SearchInfo List
     @ResponseBody
     @RequestMapping("search")
@@ -55,6 +66,20 @@ public class MainController {
         }
         try {
             return search.Searcher(name,num);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "ERROR";
+    }
+    //搜索歌单
+    @ResponseBody
+    @RequestMapping("search2")
+    public String search2(String name, int num) {
+        if ("0".equals(String.valueOf(num)) || "null".equals(String.valueOf(num)) || num <= 0) {
+            num = 50;
+        }
+        try {
+            return search.Searcher2(name,num);
         } catch (IOException e) {
             e.printStackTrace();
         }

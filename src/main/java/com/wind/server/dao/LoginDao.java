@@ -12,7 +12,6 @@ public class LoginDao {
     public String Test(int id){
         String relpass= null;
         return musicMapper.getSinger(id);
-
     }
 
 //    public Boolean check(String name) {

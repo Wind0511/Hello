@@ -1,4 +1,4 @@
-package com.wind.server.entity.mongoDBSaveEntity;
+package com.wind.server.entity.mongoSave;
 
 import com.wind.server.entity.search.SearchInfo;
 

@@ -9,22 +9,19 @@
 <!--	FROM user-->
 <!--	</select>-->
 
-	<select id="getSinger" resultType="java.lang.String">
-	SELECT singer
-	FROM list WHERE id = #{id}
-	</select>
-
-<!--	<select id="Check" resultType="java.lang.Integer">-->
-<!--	SELECT COUNT(*)-->
-<!--	FROM user-->
-<!--	WHERE name  = #{name}-->
+<!--	<select id="getSinger" resultType="java.lang.String">-->
+<!--	SELECT singer-->
+<!--	FROM list WHERE id = #{id}-->
 <!--	</select>-->
-<!--	<insert id="insertUser">-->
-<!--	insert into-->
-<!--		user(name,pass)-->
-<!--	value-->
-<!--		(#{name},#{pass})-->
-<!--	</insert>-->
+
+
+	<insert id="Operations">
+	insert into
+		operation(type,ip,session,time)
+	value
+		(#{type},#{ip},#{session},#{time})
+	</insert>
+
 
 </mapper>
 

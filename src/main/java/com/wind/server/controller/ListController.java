@@ -1,9 +1,10 @@
 package com.wind.server.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.wind.server.dao.LoginDao;
-import com.wind.server.entity.mongoDBSaveEntity.SaveList;
+import com.wind.server.dao.MainDao;
+import com.wind.server.entity.mongoSave.SaveList;
 import com.wind.server.entity.search.SearchInfo;
+import com.wind.server.tools.IpUtils;
 import com.wind.server.tools.Md5String;
 import com.wind.server.tools.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,13 +26,15 @@ import java.util.UUID;
 
 @Controller
 public class ListController {
+
     @Autowired
     MongoTemplate mongoTemplate;
-
+    @Autowired
+    IpUtils ipUtils;
     @Autowired
     RedisUtil redisUtil;
     @Autowired
-    LoginDao loginDao;
+    MainDao mainDao;
     Md5String md5String = new Md5String();
 
     @ResponseBody
@@ -124,7 +126,7 @@ public class ListController {
     //***************************************************************************************************管理员
     @ResponseBody
     @RequestMapping("get4")
-    public String get4(HttpSession session, String pass) {
+    public String get4(HttpSession session, String pass,HttpServletRequest request) {
         try {
             if (redisUtil.get(session.getId()).equals(pass)) {
                 Query query = new Query();
@@ -132,6 +134,7 @@ public class ListController {
                 for (int i = 0; i < saveList.size(); i++) {
                     saveList.get(i).setPass("");
                 }
+                mainDao.adminOperationInformation(session,request,request.getRequestURI()+":"+request.getMethod());
                 return JSON.toJSONString(saveList);
             } else
                 return "您不是管理员";
@@ -139,43 +142,48 @@ public class ListController {
             return "你不是管理员";
         }
     }
+
     //inform:预留信息 id：歌单id adminpass：管理员密码 userpass：用户密码
     @RequestMapping("pwdutil")
     @ResponseBody
-    public String pwdUtil(HttpSession session,String inform,String id,String adminpass,String userpass){
+    public String pwdUtil(HttpSession session,HttpServletRequest request,String inform, String id, String adminpass, String userpass) {
         try {
             if (redisUtil.get(session.getId()).equals(adminpass)) {
-        List<Criteria> criteria = new ArrayList<>();
-        criteria.add(Criteria.where("inform").is(inform));
-        criteria.add(Criteria.where("id").is(id));
-        Query query = new Query(new Criteria().andOperator(criteria.toArray(new Criteria[]{})));
-        SaveList saveList = mongoTemplate.findOne(query, SaveList.class, "music");
-        if (saveList==null){
-            return "预留信息不正确";
-        }
-        Md5String md5String = new Md5String();
-        Update update = new Update().set("pass", md5String.getMd5(userpass));
-        mongoTemplate.updateFirst(query, update, "music").getModifiedCount();
-        return "SUCCESS";
+                List<Criteria> criteria = new ArrayList<>();
+                criteria.add(Criteria.where("inform").is(inform));
+                criteria.add(Criteria.where("id").is(id));
+                Query query = new Query(new Criteria().andOperator(criteria.toArray(new Criteria[]{})));
+                SaveList saveList = mongoTemplate.findOne(query, SaveList.class, "music");
+                if (saveList == null) {
+                    return "预留信息不正确";
+                }
+                Md5String md5String = new Md5String();
+                Update update = new Update().set("pass", md5String.getMd5(userpass));
+                mongoTemplate.updateFirst(query, update, "music").getModifiedCount();
+                mainDao.adminOperationInformation(session,request,request.getRequestURI()+":"+request.getMethod());
+                return "SUCCESS";
+
             } else
                 return "您不是管理员";
         } catch (Exception e) {
-            return "你不是管理员，或出现其他异常"+e.toString();
+            return "你不是管理员，或出现其他异常 " + e.toString();
         }
     }
+
     //int 歌单id
     @ResponseBody
-    @RequestMapping("get4")
-    public String get4(HttpSession session, String pass,int id) {
+    @RequestMapping("get5")
+    public String get4(HttpSession session, String pass, int id, HttpServletRequest request) {
         try {
             if (redisUtil.get(session.getId()).equals(pass)) {
                 Query query = new Query(Criteria.where("id").is(id));
                 mongoTemplate.remove(query);
+                mainDao.adminOperationInformation(session, request, request.getRequestURI()+":"+request.getMethod());
                 return "success";
             } else
                 return "您不是管理员";
         } catch (Exception e) {
-            return "你不是管理员,或出现其他异常"+e.toString();
+            return "你不是管理员,或出现其他异常 " + e.toString();
         }
     }
 }

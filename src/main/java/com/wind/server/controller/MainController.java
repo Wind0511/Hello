@@ -1,8 +1,8 @@
 package com.wind.server.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.wind.server.dao.LoginDao;
-import com.wind.server.entity.mongoDBSaveEntity.SaveList;
+import com.wind.server.dao.MainDao;
+import com.wind.server.entity.mongoSave.SaveList;
 import com.wind.server.entity.search.SearchInfo;
 import com.wind.server.entity.singer.SingerSong;
 import com.wind.server.entity.singer.Song;
@@ -27,7 +27,7 @@ public class MainController {
     @Autowired
     MongoTemplate mongoTemplate;
     @Autowired
-    LoginDao loginDao;
+    MainDao mainDao;
     @Autowired
     ApiHelper search;
 
@@ -36,11 +36,6 @@ public class MainController {
         return "register";
     }
 
-    @RequestMapping("tdb")
-    @ResponseBody
-    public String a() {
-        return loginDao.Test(1);
-    }
 
     public String list(int id) {
         return "";

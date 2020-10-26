@@ -1,9 +1,9 @@
 package com.wind.server.mapper;
 
+import com.wind.server.entity.AdminOperation;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MusicMapper {
-    String getSinger(int id);
-
+    int Operations(AdminOperation adminOperation);
 }

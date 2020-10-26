@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang='en' class='csstransforms csstransforms3d csstransitions'><!--<![endif]-->
+<head><title>JYmusic音乐管理系统-DJ音乐系统</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <meta content='telephone=no' name='format-detection'>
+    <meta name='keywords' content='JYmusic,JYmusic音乐管理程序,php音乐程序,原创音乐程序,音乐程序,dj舞曲程序,音乐程序，音乐管理程序，舞曲程序'>
+    <meta name='description'
+          content='JYmusic是Php+Mysql开发的一款开源的跨平台音乐管理系统,采用国内最优秀php框架thinkphp。程序完全免费，稳定，易于扩展且具有超强大负载能力，完全可以满足音乐、DJ、音乐分享、音乐资讯站等使用。'>
+    <meta name='author' content='JYmusic音乐管理系统'>
+    <link type='image/x-ico; charset=binary' rel='JYmusic icon' href='img/favicon.ico'><!--Css-->
+    <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/jy.css?1.0.0'>
+    <link rel='stylesheet' type='text/css' href='css/plugs.min.css' media='all'>
+    <link rel='stylesheet' type='text/css' href='css/style.css' media='all'><!--js-->
+    <script src='js/jquery-2.0.3.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script type='text/javascript'>
+        (function () {
+            window.JY = {
+                'root': '/',
+                'public': '/public',
+                'domains': {'home': '/', 'api': '/api', 'user': '/user', 'article': '/article', 'mobile': ''},
+                'deep': '/',
+                'model': ['2', 'html'],
+                'user_active_url': '/user/active.html'
+            }
+        })();
+    </script>
+    <link rel='stylesheet' href='css/layer.css?v=3.0.3303'
+          id='layuicss-skinlayercss'>
+</head>
+<body style=''><!--布局-->
+<div class='wide_layout relative w_xs_auto'>
+    <header class='header'><!--头顶部-->
+        <section class='h_top hidden-xs'>
+            <div class='container'>
+                <div class='row clearfix'>
+                    <div class='col-md-3 col-sm-4'><a href='/' class='pull-left logo mt_15'><img
+                            src='img/logo.jpg' alt='JYmusic'></a></div>
+                    <div class='col-md-4 col-sm-8 t_align_c'>
+                        <div class='search-box mt_15'>
+                            <form role='search' class='relative type_2' id='search_form' method='get'
+                                  action='/search.html'><input type='text' class='d_none' name='type' value='1'><input
+                                    type='text' class='full_width' name='keys' placeholder='搜索'>
+                                <button class='search_button tr_all_hover' style='background-image: url(/img/search.jpg)'></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class='col-md-5 col-sm-8 t_align_c d_xs_none'>
+                        <ul class=' clearfix users_nav'>
+                            <li><img src='img/logo.jpg'>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!--头底部-->
+        <section class='h_bot_part'>
+            <div class='menu_wrap'>
+                <div class='container'>
+                    <div class='clearfix row'>
+                        <div class='col-xs-4 hidden-md hidden-lg hidden-sm'><a href='/'
+                                                                               class='pull-left logo p_vr_0'><img
+                                src='img/logo.jpg' alt='JYmusic'></a></div>
+                        <div class='col-sm-12 col-xs-8'>
+                            <nav role='navigation'>
+                                <div class='navbar-header'>
+                                    <button type='button' class='navbar-toggle collapsed bg_scheme_color mt_0'
+                                            data-toggle='collapse' data-target='#navbar' aria-expanded='false'
+                                            aria-controls='navbar'><span class='sr-only'>切换导航</span><span
+                                            class='icon-bar'></span><span class='icon-bar'></span><span
+                                            class='icon-bar'></span></button>
+                                </div>
+                                <div id='navbar' class='collapse navbar-collapse '>
+                                    <ul class='nav navbar-nav nav_menu full_width  relative'>
+                                        <li class='t-nav current'><a href='/' target='_self' class=''>
+                                            首页 </a></li>
+                                        <li class='t-nav '><a href='/album.html' target='_self' class=''>
+                                            专辑 </a></li>
+                                        <li class='t-nav '><a href='/artist.html' target='_self' class=''>
+                                            音乐人 </a></li>
+                                        <li class='t-nav '><a href='/genre.html' target='_self' class=''>
+                                            歌曲分类 </a></li>
+                                        <li class='t-nav '><a href='/tag.html' target='_self' class=''>
+                                            风格标签 </a></li>
+                                        <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
+                                            歌曲排行 </a></li>
+                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
+                                            音乐资讯 </a></li>
+
+                                        <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
+                                                                                                    href='#'
+                                                                                                    class='pt_5 color_light bg_scheme_color'><span
+                                                class='d_inline_middle shop_icon'><i class='jy jy-like jy-2x'></i><span
+                                                class='count tr_delay_hover type_2 circle t_align_c'>10</span></span><b>每日推荐</b></a>
+                                            <div class='songs-day-hot top_arrow tr_all_hover '>
+                                                <div class=' sc_header'>每日推荐</div>
+                                                <ul class='products_list'>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1105.html'>李宗盛 - 山丘
+                                                                (Live)</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1105'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1106.html'>赵已然 - 再回首</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1106'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1107.html'>朴树 - 送别</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1107'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1093.html'>李志 -
+                                                                山阴路的夏天</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1093'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1094.html'>万晓利 - 老狗</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1094'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1095.html'>谣乐队 -
+                                                                唱歌的孩子</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1095'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header><!-- /头部 --><!-- 主体 -->
+    <link rel='stylesheet' type='text/css' href='css/swiper.min.css'>
+    <script src='js/swiper.jquery.min.js'></script>
+    <style>.swiper-container {
+        width: 1140px;
+        height: 360px;
+        margin-top: 15px;
+    }
+    .swiper-pagination-bullet {
+        width: 30px;
+        height: 4px;
+        border-radius: 0;
+        background: #000;
+        opacity: .2;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #e73c31;
+        opacity: 1;
+    }
+    </style>
+    <!--轮播  1140*360-->
+    <div class='swiper-container swiper-container-horizontal'>
+        <div class='swiper-wrapper' style='transform: translate3d(-2280px, 0px, 0px); transition-duration: 0ms;'>
+            <div class='swiper-slide swiper-slide-duplicate' data-url='/home/index/index.html?id=5&amp;name=jy'
+                 data-swiper-slide-index='3' style='width: 1140px;'><a href='http://www.jyuu.cn'><img
+                    src='http://ugc.cdn.qianqian.com/yinyueren/pic/cf602a2aeed378b781d6.jpg@w_1220,d_progressive'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-prev' data-url='/home/index/index.html?id=5&amp;name=jy'
+                 data-swiper-slide-index='0' style='width: 1140px;'><a href='http://jyuu.cn'><img
+                    src='http://ugc.cdn.qianqian.com/yinyueren/pic/793db1cc912bc04acd15.png@w_1220,d_progressive'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-active' data-url='/home/index/index.html?id=5&amp;name=jy'
+                 data-swiper-slide-index='1' style='width: 1140px;'><a href='http://jyuu.cn'><img
+                    src='http://ugc.cdn.qianqian.com/yinyueren/pic/e330a5b86b3833f64812.jpg@w_1220,d_progressive'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-next' data-url='/home/index/index.html?id=5&amp;name=jy'
+                 data-swiper-slide-index='2' style='width: 1140px;'><a href='http://v2.dev/'><img
+                    src='http://ugc.cdn.qianqian.com/yinyueren/pic/cf602a2aeed378b781d6.jpg@w_1220,d_progressive'></a>
+            </div>
+            <div class='swiper-slide' data-url='/home/index/index.html?id=5&amp;name=jy' data-swiper-slide-index='3'
+                 style='width: 1140px;'><a href='http://www.jyuu.cn'><img
+                    src='http://ugc.cdn.qianqian.com/yinyueren/pic/cf602a2aeed378b781d6.jpg@w_1220,d_progressive'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev'
+                 data-url='/home/index/index.html?id=5&amp;name=jy' data-swiper-slide-index='0' style='width: 1140px;'>
+                <a href='http://jyuu.cn'><img
+                        src='http://ugc.cdn.qianqian.com/yinyueren/pic/793db1cc912bc04acd15.png@w_1220,d_progressive'></a>
+            </div>
+        </div><!-- 如果需要分页器 -->
+        <div class='swiper-pagination swiper-pagination-bullets'><span class='swiper-pagination-bullet'></span><span
+                class='swiper-pagination-bullet swiper-pagination-bullet-active'></span><span
+                class='swiper-pagination-bullet'></span><span class='swiper-pagination-bullet'></span></div>
+        <!-- 如果需要导航按钮 -->
+        <div class='swiper-button-prev swiper-button-white'></div>
+        <div class='swiper-button-next swiper-button-white'></div>
+    </div>
+
+
+
+    <p style='position: fixed;bottom: 0; opacity :.01'>Powered by <a href='http://jyuu.cn'>JYmusic</a></p>
+    <div class='page_content_offset'>
+        <div class='container'>
+            <div class='row clearfix '>
+                <div class='col-sm-8'>
+                    <div class='new-title clearfix mb_15'><h2 class='pull-left hidden-xs'><img src='img/hot.jpg'>歌曲TOP12</h2>
+                        <ul class='pull-right tabs_nav mb_10' role='tablist'>
+                            <li class='active'><a class='tr_delay_hover' data-toggle='tab' role='tab'
+                                                  href='#new'>最新添加</a></li>
+                            <li><a class='tr_delay_hover' data-toggle='tab' role='tab' href='#hot'>热门试听</a></li>
+                            <li><a class='tr_delay_hover' data-toggle='tab' role='tab' href='#listens'>推荐单曲</a></li>
+                        </ul>
+                    </div>
+                    <div class='tab-content mb_15'>
+                        <div class='tab-pane fade' id='listens'>
+
+
+
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>1</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1105.html'>山丘 (Live)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/506.html'>李宗盛</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1105.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1105' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1105'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>2</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1106.html'>再回首</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/507.html'>赵已然</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1106.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1106' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1106'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>3</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1107.html'>送别</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/353.html'>朴树</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1107.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1107' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1107'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>4</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1093.html'>山阴路的夏天</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/503.html'>李志</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1093.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1093' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1093'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>5</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1094.html'>老狗</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/359.html'>万晓利</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1094.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1094' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1094'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>6</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1095.html'>唱歌的孩子</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/504.html'>谣乐队</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1095.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1095' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1095'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>7</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1096.html'>北方的女王(demo)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/368.html'>尧十三</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1096.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1096' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1096'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>8</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1097.html'>带不走的风景</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/486.html'>Jam</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1097.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1097' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1097'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>9</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1098.html'>游子谣(钢琴版)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/343.html'>蒋明</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1098.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1098' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1098'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>10</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1099.html'>不陌生的人</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/368.html'>尧十三</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1099.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1099' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1099'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>11</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1100.html'>背包客</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/458.html'>翁大涵</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1100.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1100' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1100'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>12</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1101.html'>途中</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/361.html'>陈鸿宇</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1101.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1101' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me ' data-id='1101'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class='tab-pane fade' id='hot'>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>1</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1220.html'>This Is Who We Are(Club Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/564.html'>Dash Berlin</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1220.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1220' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1220'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>2</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1222.html'>The Hum (Original Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/0.html'></a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1222.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1222' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1222'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>3</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1218.html'>Tonight (Extended Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/562.html'>Don Diablo</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1218.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1218' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1218'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>4</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1219.html'>Sun Is Shining</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/563.html'>Axwell Λ Ingrosso</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1219.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1219' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1219'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>5</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1105.html'>山丘 (Live)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/506.html'>李宗盛</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1105.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1105' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1105'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>6</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1216.html'>Freaks (W&amp;W Bigroom Edit)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/560.html'>W&amp;W</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1216.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1216' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1216'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>7</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1215.html'>The Spook</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/559.html'>KSHMR</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1215.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1215' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1215'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>8</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1217.html'>Overdrive (Part 2) (Club Edit)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/561.html'>Calvin Harris</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1217.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1217' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1217'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>9</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1107.html'>送别</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/353.html'>朴树</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1107.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1107' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1107'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>10</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1106.html'>再回首</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/507.html'>赵已然</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/minyao.html'>民谣</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1106.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1106' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1106'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>11</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1214.html'>Levels - Radio Edit</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/558.html'>Avicii</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1214.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1214' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1214'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>12</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1211.html'>Koala (Original Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/557.html'>Oliver Heldens</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1211.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a data-id='1211' data-action='fav'
+                                                                              href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1211'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                        </div>
+                        <div class='tab-pane fade in active' id='new'>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>1</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1220.html'>This Is Who We Are(Club Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/564.html'>Dash Berlin</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1220.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1220'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1220'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>2</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1222.html'>The Hum (Original Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/0.html'></a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1222.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1222'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1222'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num ls_num_top'>3</span><a class='text-ellipsis' target='_play'
+                                                                             href='/music/1218.html'>Tonight (Extended Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/562.html'>Don Diablo</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1218.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1218'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1218'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>4</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1219.html'>Sun Is Shining</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/563.html'>Axwell Λ Ingrosso</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1219.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1219'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1219'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>5</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1215.html'>The Spook</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/559.html'>KSHMR</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1215.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1215'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1215'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>6</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1216.html'>Freaks (W&amp;W Bigroom Edit)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/560.html'>W&amp;W</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1216.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1216'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1216'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>7</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1217.html'>Overdrive (Part 2) (Club Edit)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/561.html'>Calvin Harris</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1217.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1217'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1217'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>8</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1210.html'>Boneless</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/556.html'>Steve Aoki</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1210.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1210'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1210'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>9</span><a class='text-ellipsis' target='_play'
+                                                                   href='/music/1211.html'>Koala (Original Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/557.html'>Oliver Heldens</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1211.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1211'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1211'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>10</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1212.html'>Bangarang</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/322.html'>Skrillex</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1212.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1212'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1212'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>11</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1213.html'>Turn Up The Speakers (Original Mix)</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/277.html'>Afrojack</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1213.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1213'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1213'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                            <div class='mb_10 clearfix relative play_box'>
+                                <div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'><span
+                                        class='ls_num '>12</span><a class='text-ellipsis' target='_play'
+                                                                    href='/music/1214.html'>Levels - Radio Edit</a></span><span
+                                        class='col-sm-3 col-xs-2 p_hr_0'><a class='text-ellipsis singer' target='_sing'
+                                                                            href='/artist/558.html'>Avicii</a></span><span
+                                        class='col-sm-2 hidden-xs singer'><a
+                                        href='/genre/dianyin.html'>电音舞曲</a></span><span
+                                        class='col-sm-2 col-xs-2 ls_btns'><a class='hidden-xs' target='_down'
+                                                                             href='/down/1214.html'><i
+                                        class='jy jy-cloud-down-f'></i></a><a class='hidden-xs' data-id='1214'
+                                                                              data-action='fav' href='javascript:;'><i
+                                        class='jy jy-like'></i></a><a class='jp-play-me' data-id='1214'
+                                                                      href='javascript:;'><i class='jy jy-play'></i></a></span>
+                                </div>
+                                <hr class='l_hr'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-sm-4'>
+                    <div class='clearfix new-title mb_15'><h2 class='pull-left'>推荐专辑</h2>
+                        <div class='more mb_10'><a href='/album.html'>更多&gt;&gt;</a></div>
+                    </div>
+                    <div class='clearfix row'>
+                        <div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'
+                                                          class='pull-left rca_cover'><img
+                                class='s_animate animate_ftr animate_horizontal_finished'
+                                src='http://p1.music.126.net/hhQl6A2lAUYR4vzkdy5PQw==/19057835044316507.jpg'
+                                alt='EDM Trap丨令人深陷的毒性低音'></a></div>
+                        <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html'
+                                                                                                   target='_album'>EDM
+                            Trap丨令人深陷的毒性低音</a></h4>
+                            <p class='small'>2017-08-28 ，404次浏览</p>
+                            <p>2012年，一些制作人把电子舞曲（EDM）和Trap音乐结合... <a class='ml_10' href='/album/10.html' target='_album'>详细</a>
+                            </p></div>
+                    </div>
+                    <hr>
+                    <div class='clearfix row'>
+                        <div class='col-sm-4 col-xs-5'><a href='/album/13.html' target='_album'
+                                                          class='pull-left rca_cover'><img
+                                class='s_animate animate_ftr animate_horizontal_finished'
+                                src='http://p1.music.126.net/TTu5sV2dncjWJmQv3gScdA==/18513576790299497.jpg'
+                                alt='为我的思念歌一曲：欧美摇滚选集'></a></div>
+                        <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/13.html'
+                                                                                                   target='_album'>为我的思念歌一曲：欧美摇滚选集</a>
+                        </h4>
+                            <p class='small'>2017-08-28 ，273次浏览</p>
+                            <p>相隔千里的牵挂，跨越时空的思念，化作吉他与架子鼓间传出的歌声... <a class='ml_10' href='/album/13.html' target='_album'>详细</a>
+                            </p></div>
+                    </div>
+                    <hr>
+                    <div class='clearfix row'>
+                        <div class='col-sm-4 col-xs-5'><a href='/album/15.html' target='_album'
+                                                          class='pull-left rca_cover'><img
+                                class='s_animate animate_ftr animate_horizontal_finished'
+                                src='http://p1.music.126.net/-NC-HC1iwQxI1QlWfyIwmQ==/8952223673382202.jpg'
+                                alt='精选劲爆中文舞曲（一）'></a></div>
+                        <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/15.html'
+                                                                                                   target='_album'>精选劲爆中文舞曲（一）</a>
+                        </h4>
+                            <p class='small'>2017-08-28 ，264次浏览</p>
+                            <p>精选夜店劲爆舞曲，希望大家喜欢 <a class='ml_10' href='/album/15.html' target='_album'>详细</a></p></div>
+                    </div>
+                    <hr>
+                    <div class='clearfix row'>
+                        <div class='col-sm-4 col-xs-5'><a href='/album/5.html' target='_album'
+                                                          class='pull-left rca_cover'><img
+                                class='s_animate animate_ftr animate_horizontal_finished'
+                                src='http://p1.music.126.net/G-5vUn6qcFm2Tq6IgpeEAg==/1367792481169060.jpg'
+                                alt='「欧美惊艳翻唱」唤醒沉睡的耳朵'></a></div>
+                        <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/5.html'
+                                                                                                   target='_album'>「欧美惊艳翻唱」唤醒沉睡的耳朵</a>
+                        </h4>
+                            <p class='small'>2017-08-28 ，130次浏览</p>
+                            <p>歌单里的歌以发行时间为准
+
+                                听腻了原唱，我们来听听翻唱吧... <a class='ml_10' href='/album/5.html' target='_album'>详细</a></p></div>
+                    </div>
+                    <hr>
+                    <div class='clearfix row'>
+                        <div class='col-sm-4 col-xs-5'><a href='/album/11.html' target='_album'
+                                                          class='pull-left rca_cover'><img
+                                class='s_animate animate_ftr animate_horizontal_finished'
+                                src='http://p1.music.126.net/SvvTBDbrwpxgGFg-ZjqW-g==/1397479289472640.jpg'
+                                alt='开发右脑【思维激荡，潜能无限】'></a></div>
+                        <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/11.html'
+                                                                                                   target='_album'>开发右脑【思维激荡，潜能无限】</a>
+                        </h4>
+                            <p class='small'>2017-08-28 ，79次浏览</p>
+                            <p>如果想听更多α，β，θ，δ脑波音乐，还可到“催眠大师”这款软... <a class='ml_10' href='/album/11.html' target='_album'>详细</a>
+                            </p></div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+
+
+            <div class='row clearfix mb_20'>
+                <div class='col-md-12'>
+                    <div class='clearfix new-title mb_15'><h2 class=''><i class='jy jy-send-f mr_10'></i>友情链接</h2></div>
+                    <ul><!-- 普通友情链接 -->
+                        <li style='margin:5px; display: inline-block;'><a href='http://jyuu.cn' target='_blank'>JYmusic官网</a>
+                        </li>
+                        <li style='margin:5px; display: inline-block;'><a href='https://www.so.com' target='_blank'>360搜索</a>
+                        </li>
+                        <li style='margin:5px; display: inline-block;'><a href='https://www.baidu.com' target='_blank'>百度</a>
+                        </li>
+                        <p style='position: fixed;bottom: 0; opacity :.01'>Powered by <a
+                                href='http://jyuu.cn'>JYmusic</a></p></ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- /主体 --><!-- 底部 -->
+    <footer id='footer'>
+        <div class='container hidden-xs'>
+            <div class='row clearfix'>
+                <div class='col-sm-6'><h3>JYmusic音乐管理系统</h3>
+                    <p>
+                        music是Php+Mysql开发的一款开源的跨平台音乐管理系统,采用国内最优秀php框架thinkphp。程序完全免费，稳定，易于扩展且具有超强大负载能力，完全可以满足音乐、DJ、音乐分享、音乐资讯站等使用。</p>
+                </div>
+                <div class='col-sm-2'><h3>关于网站</h3>
+                    <ul class='vertical_list'>
+                        <li><a class='tr_delay_hover' href='/site/about/link.html'>友情连接</a></li>
+                        <li><a class='tr_delay_hover' href='/site/about/contact.html'>联系我们</a></li>
+                        <li><a class='tr_delay_hover' href='/site/about/copy.html'>版权声明</a></li>
+                        <li><a class='tr_delay_hover' href='/site/about/about.html'>关于music</a></li>
+                    </ul>
+                </div>
+                <div class='col-sm-2'><h3>帮助中心</h3>
+                    <ul class='vertical_list'>
+                        <li><a class='tr_delay_hover' href='/site/help/ver.html'>认证音乐人</a></li>
+                        <li><a class='tr_delay_hover' href='/site/help/feedback.html'>反馈建议</a></li>
+                        <li><a class='tr_delay_hover' href='/site/help/questions.html'>常见问题</a></li>
+                        <li><a class='tr_delay_hover' href='/site/help/reg.html'>如何注册</a></li>
+                    </ul>
+                </div>
+                <div class='col-sm-2'><h3>联系我们</h3>
+                    <ul class='vertical_list'>
+                        <li><i class='jy jy-envelope pull-left'></i>1053593561@qq.com</li>
+                        <li><i class='jy jy-share-square pull-left'></i>QQ: 1053593561</li>
+                        <li><i class='jy jy-phone pull-left'></i>18888888889</li>
+                        <li><i class='jy jy-music pull-left'></i><a class='contact_e' href='http://www.jyuu.cn'>music音乐网管理系统</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class='row clearfix'><!--版权的部分 请务必保留版权 谢谢合作！-->
+                <div class='footer_bottom_part col-sm-6 '><p class='pull-left'>人才招聘中 </p></div>
+                <div class='col-sm-6 mb_10'><!--图标-->
+                    <ul class='clearfix horizontal_list social_icons pull-right'>
+                        <li class='html5 relative'><span class='tooltip tr_all_hover  '>五险一金</span><a
+                                class=' t_align_c tr_delay_hover ' href='javascript:;'>加</a>
+                        </li>
+                        <li class='css3 ml_5 relative'><span class='tooltip tr_all_hover  '>待遇从优</span><a
+                                class='  t_align_c tr_delay_hover' href='javascript:;'>入</a>
+                        </li>
+                        <li class='android ml_5 relative'><span class='tooltip tr_all_hover  '>带薪休假</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>我</a>
+                        </li>
+                        <li class='iPhone ml_5 relative'><span class='tooltip tr_all_hover  '>时间自由</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>们</a>
+                        </li>
+                        <li class='rss ml_5 relative'><span class='tooltip tr_all_hover  '>热爱音乐</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>吧</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!-- /底部 -->
+</div>
+
+<script type='text/javascript' src='js/jquery.jplayer.min.js'></script>
+<script type='text/javascript' src='js/jyplayer.js?1.01'></script>
+<script type='text/javascript' src='js/app.js?0.1'></script>
+<script type='text/javascript' src='js/plugs.min.js'></script>
+<script type='text/javascript' src='js/common.js?v=1.0'></script>
+<script src='js/layer.js'></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type : 'get',
+            dataType : 'json',
+            url : '/getlist?id=19723756',
+            success: function(rec){
+                var html = '';
+                var list = rec;
+
+
+                for(var i=0;i<12;i++){
+
+                    alert(i);
+
+
+
+                    html += "<div class='mb_10 clearfix relative play_box'>" +
+                        "<div class='row clearfix song_list'>"+"<span class='col-sm-5 col-xs-8'>"+
+                        "<span class='ls_num ls_num_top'>"+i+1+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                        "<a class='text-ellipsis singer' target='_sing'    href='/artist/506.html'>"+list[i].singerName+"</a></span>"+
+                        "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                        "<a                                                href='/genre/minyao.html'>"+list[i].albulName+
+                        "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                        "<a class='hidden-xs' target='_down'                                                href='/down/1105.html'>"+
+                        "<i                                            class='jy jy-cloud-down-f'></i></a>"+
+                        "<a data-id='1105' data-action='fav'                                                href='javascript:;'>"+
+                        "<i                                            class='jy jy-like'></i></a>"+
+                        "<a class='jp-play-me ' data-id='1105'                                                href='javascript:;'>"+
+                        "<i class='jy jy-play'>"+"</i></a></span></div>"+
+                        "<hr class='l_hr'></div>";
+
+
+
+                };
+                console.log(html);
+                $("#listens").html(html);
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
+
+        $.ajax({
+            type : 'get',
+            dataType : 'json',
+            url : '/getlist?id=3779629',
+            success: function(rec){
+                var html = '';
+                var list = rec;
+
+
+                for(var i=0;i<12;i++){
+
+
+
+
+
+                    html += "<div class='mb_10 clearfix relative play_box'>" +
+                        "<div class='row clearfix song_list'>"+"<span class='col-sm-5 col-xs-8'>"+
+                        "<span class='ls_num ls_num_top'>"+i+1+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                        "<a class='text-ellipsis singer' target='_sing'    href='/artist/506.html'>"+list[i].singerName+"</a></span>"+
+                        "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                        "<a                                                href='/genre/minyao.html'>"+list[i].albulName+
+                        "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                        "<a class='hidden-xs' target='_down'                                                href='/down/1105.html'>"+
+                        "<i                                            class='jy jy-cloud-down-f'></i></a>"+
+                        "<a data-id='1105' data-action='fav'                                                href='javascript:;'>"+
+                        "<i                                            class='jy jy-like'></i></a>"+
+                        "<a class='jp-play-me ' data-id='1105'                                                href='javascript:;'>"+
+                        "<i class='jy jy-play'>"+"</i></a></span></div>"+
+                        "<hr class='l_hr'></div>";
+
+
+
+                };
+                console.log(html);
+                $("#hot").html(html);
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
+
+
+        $.ajax({
+            type : 'get',
+            dataType : 'json',
+            url : '/getlist?id=3778678',
+            success: function(rec){
+                var html = '';
+                var list = rec;
+
+
+                for(var i=0;i<12;i++){
+
+                    alert(i);
+
+
+
+                    html += "<div class='mb_10 clearfix relative play_box'>" +
+                        "<div class='row clearfix song_list'>"+"<span class='col-sm-5 col-xs-8'>"+
+                        "<span class='ls_num ls_num_top'>"+i+1+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                        "<a class='text-ellipsis singer' target='_sing'    href='/artist/506.html'>"+list[i].singerName+"</a></span>"+
+                        "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                        "<a                                                href='/genre/minyao.html'>"+list[i].albulName+
+                        "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                        "<a class='hidden-xs' target='_down'                                                href='/down/1105.html'>"+
+                        "<i                                            class='jy jy-cloud-down-f'></i></a>"+
+                        "<a data-id='1105' data-action='fav'                                                href='javascript:;'>"+
+                        "<i                                            class='jy jy-like'></i></a>"+
+                        "<a class='jp-play-me ' data-id='1105'                                                href='javascript:;'>"+
+                        "<i class='jy jy-play'>"+"</i></a></span></div>"+
+                        "<hr class='l_hr'></div>";
+
+
+
+                };
+                console.log(html);
+                $("#new").html(html);
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
+
+
+
+        var mySwiper = new Swiper(".swiper-container", {
+            loop: true,
+            autoplay: 5000,
+            // 如果需要分页器
+            pagination: ".swiper-pagination",
+            // 如果需要前进后退按钮
+            nextButton: ".swiper-button-next",
+            prevButton: ".swiper-button-prev",
+        });
+
+    })
+</script>
+
+
+</body>
+</html>

@@ -2,8 +2,10 @@ package com.wind.server.dao;
 
 
 import com.wind.server.entity.AdminOperation;
+import com.wind.server.entity.ErrorCollection;
 import com.wind.server.mapper.MusicMapper;
 import com.wind.server.tools.IpUtils;
+import com.wind.server.tools.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +16,20 @@ import java.util.Calendar;
 
 @Service
 public class MainDao {
+    /**
+     *
+     */
     @Autowired
     MusicMapper musicMapper;
 
     public int adminOperationInformation(HttpSession session, HttpServletRequest request,String type){
         IpUtils ipUtils = new IpUtils();
-        AdminOperation adminOperation = new AdminOperation();
-        adminOperation.setSession(session.getId());
-        adminOperation.setIp(ipUtils.getIpAddr(request));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(System.currentTimeMillis());
-        adminOperation.setTime(sdf.format(cal.getTime()).toString());
-        adminOperation.setType(type);
+        AdminOperation adminOperation = new AdminOperation(type,ipUtils.getIpAddr(request),new TimeUtil().getTime(),session.getId());
         return musicMapper.Operations(adminOperation);
     }
-    public int errorCollection(HttpServletRequest request){
-        return 1;
+    public int errorCollection(String request,String error){
+        ErrorCollection errorCollection = new ErrorCollection(new TimeUtil().getTime(),request,error);
+        return musicMapper.ErrorCollection(errorCollection);
     }
 
 

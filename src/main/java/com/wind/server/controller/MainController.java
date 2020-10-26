@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +44,11 @@ public class MainController {
 
     @ResponseBody
     @RequestMapping("lrc")
-    public String lrc(int id) {
+    public String lrc(int id, HttpServletRequest request) {
         try {
             return search.lrc(id);
         } catch (IOException e) {
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "ERROR";
@@ -55,13 +57,14 @@ public class MainController {
     //传入搜索内容 和 搜索条数（歌手专辑歌曲名均可）默认返回搜索内容前50 Json SearchInfo List
     @ResponseBody
     @RequestMapping("search")
-    public String search(String name, int num) {
+    public String search(String name, int num,HttpServletRequest request) {
         if ("0".equals(String.valueOf(num)) || "null".equals(String.valueOf(num)) || num <= 0) {
             num = 50;
         }
         try {
             return search.Searcher(name,num);
         } catch (IOException e) {
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "ERROR";
@@ -69,13 +72,14 @@ public class MainController {
     //搜索歌单
     @ResponseBody
     @RequestMapping("search2")
-    public String search2(String name, int num) {
+    public String search2(String name, int num,HttpServletRequest request) {
         if ("0".equals(String.valueOf(num)) || "null".equals(String.valueOf(num)) || num <= 0) {
             num = 50;
         }
         try {
             return search.Searcher2(name,num);
         } catch (IOException e) {
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "ERROR";
@@ -84,11 +88,12 @@ public class MainController {
     //传入歌曲id返回播放地址URL Json  Object {song,url(专辑封面)}
     @RequestMapping("song")
     @ResponseBody
-    public String songURL(int id) {
+    public String songURL(int id,HttpServletRequest request) {
         String pic = null;
         try {
             pic = search.getPic(id);
         } catch (IOException e) {
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "{\"song\":\"http://music.163.com/song/media/outer/url?id=" + id + ".mp3\",\"pic\":\"" + pic + "\"}";
@@ -97,10 +102,12 @@ public class MainController {
     //传入专辑id返回专辑歌曲
     @ResponseBody
     @RequestMapping("album")
-    public String getAlbum(int id) {
+    public String getAlbum(int id,HttpServletRequest request) {
         try {
             return search.getAlbum(id);
         } catch (IOException e) {
+
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "ERROR";
@@ -108,8 +115,8 @@ public class MainController {
 
     //传入歌手id返回歌手图片 String URL
     @ResponseBody
-    @RequestMapping("singerpic")
-    public String getSingerPic(int id) {
+    @RequestMapping("singerpic" )
+    public String getSingerPic(int id,HttpServletRequest request) {
         return search.getSingerPic(id);
     }
 
@@ -123,11 +130,13 @@ public class MainController {
     //list id拿取歌单 Json  SearchInfo List
     @ResponseBody
     @RequestMapping("getlist")
-    public String getList(String id) {
+    public String getList(String id,HttpServletRequest request) {
         long i = Long.parseLong(id);
         try {
             return search.list(search.list(i));
         } catch (IOException e) {
+
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "ERROR";
@@ -136,11 +145,13 @@ public class MainController {
     //list id拿取歌单信息 Json  ListInfo Object
     @ResponseBody
     @RequestMapping("getlistInfo")
-    public String getListInfo(String id) {
+    public String getListInfo(String id,HttpServletRequest request) {
         long i = Long.parseLong(id);
         try {
             return search.listInfo(search.list(i));
         } catch (IOException e) {
+
+            mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
         return "ERROR";

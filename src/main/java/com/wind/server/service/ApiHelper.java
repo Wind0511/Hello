@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.*;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wind.server.dao.MainDao;
 import com.wind.server.entity.list.*;
 import com.wind.server.entity.lrc.LrcResp;
 import com.wind.server.entity.search.SearchInfo;
@@ -18,10 +19,13 @@ import com.wind.server.entity.search.Songs;
 import com.wind.server.entity.singer.SingerSong;
 import com.wind.server.entity.singer.Song;
 import com.wind.server.tools.URLEncodTools;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ApiHelper {
+    @Autowired
+    MainDao mainDao;
     //资料爬取************************************************************************************
     //拿取歌词
     public String lrc(int id) throws IOException {
@@ -211,6 +215,8 @@ public class ApiHelper {
             singerSong = singer(id);
             System.out.println("*******"+singerSong);
         } catch (IOException e) {
+
+            mainDao.errorCollection("ApiHelper getStringPic",e.toString());
             e.printStackTrace();
         }
         String url = singerSong.getArtist().getPicUrl();
@@ -222,6 +228,7 @@ public class ApiHelper {
         try {
             singerSong = singer(id);
         } catch (IOException e) {
+            mainDao.errorCollection("ApiHelper getSingerSong",e.toString());
             e.printStackTrace();
         }
         List<Song> songs = singerSong.getHotSongs();

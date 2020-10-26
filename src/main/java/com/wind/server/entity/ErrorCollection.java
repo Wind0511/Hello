@@ -28,4 +28,10 @@ public class ErrorCollection {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    public ErrorCollection(String time, String type, String info) {
+        this.time = time;
+        this.type = type;
+        this.info = info;
+    }
 }

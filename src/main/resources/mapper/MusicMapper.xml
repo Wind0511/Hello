@@ -21,6 +21,12 @@
 	value
 		(#{type},#{ip},#{session},#{time})
 	</insert>
+	<insert id="ErrorCollection">
+	insert into
+		error(type,info,time)
+	value
+		(#{type},#{info},#{time})
+	</insert>
 
 
 </mapper>

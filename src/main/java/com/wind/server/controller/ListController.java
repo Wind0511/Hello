@@ -139,6 +139,7 @@ public class ListController {
             } else
                 return "您不是管理员";
         } catch (Exception e) {
+            mainDao.errorCollection(request.getRequestURI(),"你不是管理员,或出现其他异常 " + e.toString());
             return "你不是管理员";
         }
     }
@@ -166,6 +167,7 @@ public class ListController {
             } else
                 return "您不是管理员";
         } catch (Exception e) {
+            mainDao.errorCollection(request.getRequestURI(),"你不是管理员,或出现其他异常 " + e.toString());
             return "你不是管理员，或出现其他异常 " + e.toString();
         }
     }
@@ -183,6 +185,7 @@ public class ListController {
             } else
                 return "您不是管理员";
         } catch (Exception e) {
+            mainDao.errorCollection(request.getRequestURI(),"你不是管理员,或出现其他异常 " + e.toString());
             return "你不是管理员,或出现其他异常 " + e.toString();
         }
     }

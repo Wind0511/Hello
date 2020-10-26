@@ -38,7 +38,7 @@ public class MailController {
         mainDao.adminOperationInformation(session,request,request.getRequestURI()+":"+request.getMethod());
         Boolean b
                 = emailService.checkMail(session.getId(),code);
-        System.err.println(b);
+
         return b.toString();
     }
 

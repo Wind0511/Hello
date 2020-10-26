@@ -37,4 +37,11 @@ public class AdminOperation {
     public void setSession(String session) {
         this.session = session;
     }
+
+    public AdminOperation(String type, String ip, String time, String session) {
+        this.type = type;
+        this.ip = ip;
+        this.time = time;
+        this.session = session;
+    }
 }

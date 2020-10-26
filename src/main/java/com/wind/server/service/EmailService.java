@@ -1,6 +1,7 @@
 package com.wind.server.service;
 
 import com.sun.mail.util.MailSSLSocketFactory;
+import com.wind.server.dao.MainDao;
 import com.wind.server.tools.MailTemplate;
 import com.wind.server.tools.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.util.logging.Logger;
 @Service
 public class EmailService {
 
+    @Autowired
+    MainDao mainDao;
 
     @Autowired
     RedisUtil redisUtil;
@@ -54,6 +57,7 @@ public class EmailService {
             mailSSLSocketFactory = new MailSSLSocketFactory();
             mailSSLSocketFactory.setTrustAllHosts(true);
         } catch (GeneralSecurityException e) {
+            mainDao.errorCollection("EmailService initProperties",e.toString());
             e.printStackTrace();
         }
         properties.put("mail.smtp.enable", "true");
@@ -102,9 +106,11 @@ public class EmailService {
             redisUtil.set(sessionID,code);
             lean = true;
         } catch (MessagingException e) {
+            mainDao.errorCollection("EmailService MessagingException sendHtmlEmail",e.toString());
             e.printStackTrace();
             lean = false;
         } catch (UnsupportedEncodingException e) {
+            mainDao.errorCollection("EmailService UnsupportedEncodingException sendHtmlEmail",e.toString());
             e.printStackTrace();
             lean = false;
         }

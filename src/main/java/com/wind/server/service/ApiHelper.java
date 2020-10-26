@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 public class ApiHelper {
     @Autowired
     MainDao mainDao;
+
     //资料爬取************************************************************************************
     //拿取歌词
     public String lrc(int id) throws IOException {
@@ -48,16 +49,24 @@ public class ApiHelper {
 
         return JSON.toJSONString(JSON.parseObject(Json, LrcResp.class));
     }
+
     //搜索服务
-    public String Searcher(String name,int num) throws IOException {
+    public String Searcher(String name, int num) throws IOException {
         URLEncodTools urlEncodTools = new URLEncodTools();
         String enc = urlEncodTools.encode(name);
         System.out.println(enc);
-        URL u = new URL("https://music.163.com/api/search/get?s=" + enc + "&type=1&limit="+num);
+        URL u = new URL("https://music.163.com/api/search/get?s=" + enc + "&type=1&limit=" + num);
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
-        conn.connect();
+        try {
+
+
+            conn.connect();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper Search", e.toString());
+            return null;
+        }
         //获取输入流shinian
         InputStream in = conn.getInputStream();
         //读取输入流
@@ -72,16 +81,22 @@ public class ApiHelper {
 
         return editRes(Json);
     }
+
     //搜索服务(歌单)
-    public String Searcher2(String name,int num) throws IOException {
+    public String Searcher2(String name, int num) throws IOException {
         URLEncodTools urlEncodTools = new URLEncodTools();
         String enc = urlEncodTools.encode(name);
         System.out.println(enc);
-        URL u = new URL("https://music.163.com/api/search/get?s=" + enc + "&type=1000&limit="+num);
+        URL u = new URL("https://music.163.com/api/search/get?s=" + enc + "&type=1000&limit=" + num);
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
-        conn.connect();
+        try {
+            conn.connect();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper search2", e.toString());
+            return null;
+        }
         //获取输入流shinian
         InputStream in = conn.getInputStream();
         //读取输入流
@@ -93,8 +108,9 @@ public class ApiHelper {
         }
         in.close();
         String Json = sb.toString();
-        return JSONObject.toJSONString(JSON.parseObject(Json,ListSearchPackage.class).getResult());
+        return JSONObject.toJSONString(JSON.parseObject(Json, ListSearchPackage.class).getResult());
     }
+
     //得到专辑图片
     public String getPic(int id) throws IOException {
 
@@ -102,7 +118,13 @@ public class ApiHelper {
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
-        conn.connect();
+        try {
+
+            conn.connect();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper getPic", e.toString());
+            return null;
+        }
         //获取输入流shinian
         InputStream in = conn.getInputStream();
         //读取输入流
@@ -116,6 +138,7 @@ public class ApiHelper {
         String Json = sb.toString();
         return editInfo(Json);
     }
+
     //拿到专辑
     public String getAlbum(int id) throws IOException {
 
@@ -123,7 +146,14 @@ public class ApiHelper {
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
-        conn.connect();
+        try {
+
+
+            conn.connect();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper getAlbum", e.toString());
+            return null;
+        }
         //获取输入流shinian
         InputStream in = conn.getInputStream();
         //读取输入流
@@ -145,7 +175,12 @@ public class ApiHelper {
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
-        conn.connect();
+        try {
+            conn.connect();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper singer", e.toString());
+            return null;
+        }
         //获取输入流shinian
         InputStream in = conn.getInputStream();
         //读取输入流
@@ -160,6 +195,7 @@ public class ApiHelper {
 
         return JSON.parseObject(Json, SingerSong.class);
     }
+
     //拿取歌单
     public ListResult list(long id) throws IOException {
 
@@ -167,7 +203,12 @@ public class ApiHelper {
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
-        conn.connect();
+        try {
+            conn.connect();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper list(long id)", e.toString());
+            return null;
+        }
         //获取输入流shinian
         InputStream in = conn.getInputStream();
         //读取输入流
@@ -183,9 +224,7 @@ public class ApiHelper {
         return listResult;
     }
 
-
-
-//                     ___                _---ヘ
+    //                     ___                _---ヘ
 //                    く__,.ヘヽ.　　　　  /　,ー､ 〉
 //            　　　　   　＼ ', !-─‐-i　/　
 //            　　　 　    ／｀ｰ'　　　 L/／｀ヽ､
@@ -204,140 +243,168 @@ public class ApiHelper {
 //            　　　　　 　  　ﾄ-,/　|___./
 //            　　　　　 　  　'ｰ'　  !_,.:
 //
-
-
     //Json解析区******************************************************************************8
     //得到歌手图片
     public String getSingerPic(int id) {
         SingerSong singerSong = null;
         try {
-            System.out.println("*******"+singerSong);
+            System.out.println("*******" + singerSong);
             singerSong = singer(id);
-            System.out.println("*******"+singerSong);
+            System.out.println("*******" + singerSong);
         } catch (IOException e) {
 
-            mainDao.errorCollection("ApiHelper getStringPic",e.toString());
+            mainDao.errorCollection("ApiHelper getStringPic", e.toString());
             e.printStackTrace();
         }
         String url = singerSong.getArtist().getPicUrl();
         return url;
     }
+
     //打包歌手前50
     public String getSingerSong(int id) {
         SingerSong singerSong = null;
         try {
             singerSong = singer(id);
-        } catch (IOException e) {
-            mainDao.errorCollection("ApiHelper getSingerSong",e.toString());
-            e.printStackTrace();
+            List<Song> songs = singerSong.getHotSongs();
+            List<SearchInfo> searchInfos = new ArrayList<>();
+            for (int i = 0; i < songs.size(); i++) {
+                SearchInfo searchInfo = new SearchInfo();
+                searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
+                searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
+                searchInfo.setSingerId(singerSong.getArtist().getId());
+                searchInfo.setSingerName(singerSong.getArtist().getName());
+                searchInfo.setSongName(songs.get(i).getName());
+                searchInfo.setSongId(songs.get(i).getId());
+                searchInfos.add(searchInfo);
+            }
+            return JSONObject.toJSONString(searchInfos);
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper getSingerSong", e.toString());
+            return null;
         }
-        List<Song> songs = singerSong.getHotSongs();
-        List<SearchInfo> searchInfos = new ArrayList<>();
-        for(int i=0;i<songs.size();i++){
-            SearchInfo searchInfo = new SearchInfo();
-            searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
-            searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
-            searchInfo.setSingerId(singerSong.getArtist().getId());
-            searchInfo.setSingerName(singerSong.getArtist().getName());
-            searchInfo.setSongName(songs.get(i).getName());
-            searchInfo.setSongId(songs.get(i).getId());
-            searchInfos.add(searchInfo);
-        }
-        return JSONObject.toJSONString(searchInfos);
     }
 
     //打包歌单 搜索歌曲结果
     public String editRes(String Json) {
-        Select select = JSON.parseObject(Json, Select.class);
-        List<Songs> songs = select.getResult().getSongs();
-        List<SearchInfo> searchInfos = new ArrayList<>();
-        for (int i = 0; i < songs.size(); i++) {
-            SearchInfo searchInfo = new SearchInfo();
-            searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
-            searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
-            int art = songs.get(i).getArtists().size();
-            String arts = "";
-            for (int j = 0; j < songs.get(i).getArtists().size(); j++) {
-                if (j > 0)
-                    arts = arts + " and ";
-                arts = arts + songs.get(i).getArtists().get(j).getName();
+        try {
 
+            Select select = JSON.parseObject(Json, Select.class);
+            List<Songs> songs = select.getResult().getSongs();
+            List<SearchInfo> searchInfos = new ArrayList<>();
+            for (int i = 0; i < songs.size(); i++) {
+                SearchInfo searchInfo = new SearchInfo();
+                searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
+                searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
+                int art = songs.get(i).getArtists().size();
+                String arts = "";
+                for (int j = 0; j < songs.get(i).getArtists().size(); j++) {
+                    if (j > 0)
+                        arts = arts + " and ";
+                    arts = arts + songs.get(i).getArtists().get(j).getName();
+
+                }
+                searchInfo.setSingerId(songs.get(i).getArtists().get(0).getId());
+                searchInfo.setSingerName(arts);
+                searchInfo.setSongId(songs.get(i).getId());
+                searchInfo.setSongName(songs.get(i).getName());
+                searchInfos.add(searchInfo);
             }
-            searchInfo.setSingerId(songs.get(i).getArtists().get(0).getId());
-            searchInfo.setSingerName(arts);
-            searchInfo.setSongId(songs.get(i).getId());
-            searchInfo.setSongName(songs.get(i).getName());
-            searchInfos.add(searchInfo);
+            return JSONObject.toJSONString(searchInfos);
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper editRes", e.toString());
+            return null;
         }
-        return JSONObject.toJSONString(searchInfos);
     }
-    //打包歌单 搜索歌曲结果
-
-
 
     //打包专辑列表
     public String editAlbum(String Json) {
-        SelectAlbum selectAlbum = JSON.parseObject(Json, SelectAlbum.class);
-        List<Songs> songs = selectAlbum.getAlbum().getSongs();
-        List<SearchInfo> searchInfos = new ArrayList<>();
-        for (int i = 0; i < songs.size(); i++) {
-            SearchInfo searchInfo = new SearchInfo();
-            searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
-            searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
-            int art = songs.get(i).getArtists().size();
-            String arts = "";
-            for (int j = 0; j < songs.get(i).getArtists().size(); j++) {
-                if (j > 0)
-                    arts = arts + " and ";
-                arts = arts + songs.get(i).getArtists().get(j).getName();
+        try {
+            SelectAlbum selectAlbum = JSON.parseObject(Json, SelectAlbum.class);
+            List<Songs> songs = selectAlbum.getAlbum().getSongs();
+            List<SearchInfo> searchInfos = new ArrayList<>();
+            for (int i = 0; i < songs.size(); i++) {
+                SearchInfo searchInfo = new SearchInfo();
+                searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
+                searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
+                int art = songs.get(i).getArtists().size();
+                String arts = "";
+                for (int j = 0; j < songs.get(i).getArtists().size(); j++) {
+                    if (j > 0)
+                        arts = arts + " and ";
+                    arts = arts + songs.get(i).getArtists().get(j).getName();
 
+                }
+                searchInfo.setSingerId(songs.get(i).getArtists().get(0).getId());
+                searchInfo.setSingerName(arts);
+                searchInfo.setSongId(songs.get(i).getId());
+                searchInfo.setSongName(songs.get(i).getName());
+                searchInfos.add(searchInfo);
             }
-            searchInfo.setSingerId(songs.get(i).getArtists().get(0).getId());
-            searchInfo.setSingerName(arts);
-            searchInfo.setSongId(songs.get(i).getId());
-            searchInfo.setSongName(songs.get(i).getName());
-            searchInfos.add(searchInfo);
+            return JSONObject.toJSONString(searchInfos);
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper editAlbum", e.toString());
+            return null;
         }
-        return JSONObject.toJSONString(searchInfos);
     }
 
     //拿取专辑图片URL
     public String editInfo(String Json) {
-        Json = "{\"result\":" + Json + "}";
-        Select select = JSON.parseObject(Json, Select.class);
-        Songs songs = select.getResult().getSongs().get(0);
-        return songs.getAlbum().getPicURL();
-    }
-    //歌单拿取
-    public String list(ListResult listResult){
-        List<Songs> songs = listResult.getTracks();
-        System.err.println(JSON.toJSONString(listResult));
-        List<SearchInfo> searchInfos = new ArrayList<>();
-        for (int i = 0; i < songs.size(); i++) {
-            SearchInfo searchInfo = new SearchInfo();
-            searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
-            searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
-            int art = songs.get(i).getArtists().size();
-            String arts = "";
-            for (int j = 0; j < songs.get(i).getArtists().size(); j++) {
-                if (j > 0)
-                    arts = arts + " and ";
-                arts = arts + songs.get(i).getArtists().get(j).getName();
+        try {
 
-            }
-            searchInfo.setSingerId(songs.get(i).getArtists().get(0).getId());
-            searchInfo.setSingerName(arts);
-            searchInfo.setSongId(songs.get(i).getId());
-            searchInfo.setSongName(songs.get(i).getName());
-            searchInfos.add(searchInfo);
+
+            Json = "{\"result\":" + Json + "}";
+            Select select = JSON.parseObject(Json, Select.class);
+            Songs songs = select.getResult().getSongs().get(0);
+            return songs.getAlbum().getPicURL();
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper editInfo", e.toString());
+            return null;
         }
-        return JSONObject.toJSONString(searchInfos);
     }
-    public String listInfo(ListResult listResult){
-        ListInfo listInfo = new ListInfo();
-        listInfo.setId(listResult.getId());
-        listInfo.setName(listResult.getName());
-        listInfo.setUrl(listResult.getCoverImgUrl());
-        return JSON.toJSONString(listInfo);
+
+    //歌单拿取
+    public String list(ListResult listResult) {
+        try {
+
+            List<Songs> songs = listResult.getTracks();
+            System.err.println(JSON.toJSONString(listResult));
+            List<SearchInfo> searchInfos = new ArrayList<>();
+            for (int i = 0; i < songs.size(); i++) {
+                SearchInfo searchInfo = new SearchInfo();
+                searchInfo.setAlbumId(songs.get(i).getAlbum().getId());
+                searchInfo.setAlbumName(songs.get(i).getAlbum().getName());
+                int art = songs.get(i).getArtists().size();
+                String arts = "";
+                for (int j = 0; j < songs.get(i).getArtists().size(); j++) {
+                    if (j > 0)
+                        arts = arts + " and ";
+                    arts = arts + songs.get(i).getArtists().get(j).getName();
+
+                }
+                searchInfo.setSingerId(songs.get(i).getArtists().get(0).getId());
+                searchInfo.setSingerName(arts);
+                searchInfo.setSongId(songs.get(i).getId());
+                searchInfo.setSongName(songs.get(i).getName());
+                searchInfos.add(searchInfo);
+            }
+            return JSONObject.toJSONString(searchInfos);
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper list", e.toString());
+            return null;
+        }
+    }
+
+    //歌单信息获取
+    public String listInfo(ListResult listResult) {
+        try {
+            ListInfo listInfo = new ListInfo();
+            listInfo.setId(listResult.getId());
+            listInfo.setName(listResult.getName());
+            listInfo.setUrl(listResult.getCoverImgUrl());
+            return JSON.toJSONString(listInfo);
+        } catch (Exception e) {
+            mainDao.errorCollection("ApiHelper listInfo", e.toString());
+            return null;
+        }
     }
 }

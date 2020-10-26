@@ -126,7 +126,7 @@ public class ListController {
     //***************************************************************************************************管理员
     @ResponseBody
     @RequestMapping("get4")
-    public String get4(HttpSession session, String pass,HttpServletRequest request) {
+    public String get4(HttpSession session, String pass, HttpServletRequest request) {
         try {
             if (redisUtil.get(session.getId()).equals(pass)) {
                 Query query = new Query();
@@ -134,12 +134,12 @@ public class ListController {
                 for (int i = 0; i < saveList.size(); i++) {
                     saveList.get(i).setPass("");
                 }
-                mainDao.adminOperationInformation(session,request,request.getRequestURI()+":"+request.getMethod());
+                mainDao.adminOperationInformation(session, request, request.getRequestURI() + ":" + request.getMethod());
                 return JSON.toJSONString(saveList);
             } else
                 return "您不是管理员";
         } catch (Exception e) {
-            mainDao.errorCollection(request.getRequestURI(),"你不是管理员,或出现其他异常 " + e.toString());
+            mainDao.errorCollection(request.getRequestURI(), "你不是管理员,或出现其他异常 " + e.toString());
             return "你不是管理员";
         }
     }
@@ -147,7 +147,7 @@ public class ListController {
     //inform:预留信息 id：歌单id adminpass：管理员密码 userpass：用户密码
     @RequestMapping("pwdutil")
     @ResponseBody
-    public String pwdUtil(HttpSession session,HttpServletRequest request,String inform, String id, String adminpass, String userpass) {
+    public String pwdUtil(HttpSession session, HttpServletRequest request, String inform, String id, String adminpass, String userpass) {
         try {
             if (redisUtil.get(session.getId()).equals(adminpass)) {
                 List<Criteria> criteria = new ArrayList<>();
@@ -161,13 +161,13 @@ public class ListController {
                 Md5String md5String = new Md5String();
                 Update update = new Update().set("pass", md5String.getMd5(userpass));
                 mongoTemplate.updateFirst(query, update, "music").getModifiedCount();
-                mainDao.adminOperationInformation(session,request,request.getRequestURI()+":"+request.getMethod());
+                mainDao.adminOperationInformation(session, request, request.getRequestURI() + ":" + request.getMethod());
                 return "SUCCESS";
 
             } else
                 return "您不是管理员";
         } catch (Exception e) {
-            mainDao.errorCollection(request.getRequestURI(),"你不是管理员,或出现其他异常 " + e.toString());
+            mainDao.errorCollection(request.getRequestURI(), "你不是管理员,或出现其他异常 " + e.toString());
             return "你不是管理员，或出现其他异常 " + e.toString();
         }
     }
@@ -180,12 +180,12 @@ public class ListController {
             if (redisUtil.get(session.getId()).equals(pass)) {
                 Query query = new Query(Criteria.where("id").is(id));
                 mongoTemplate.remove(query);
-                mainDao.adminOperationInformation(session, request, request.getRequestURI()+":"+request.getMethod());
+                mainDao.adminOperationInformation(session, request, request.getRequestURI() + ":" + request.getMethod());
                 return "success";
             } else
                 return "您不是管理员";
         } catch (Exception e) {
-            mainDao.errorCollection(request.getRequestURI(),"你不是管理员,或出现其他异常 " + e.toString());
+            mainDao.errorCollection(request.getRequestURI(), "你不是管理员,或出现其他异常 " + e.toString());
             return "你不是管理员,或出现其他异常 " + e.toString();
         }
     }

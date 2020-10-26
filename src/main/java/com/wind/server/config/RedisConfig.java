@@ -16,13 +16,16 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-//源自互联网
+
 import java.time.Duration;
+
+//源自互联网
 public class RedisConfig extends CachingConfigurerSupport {
 
 
     /**
      * 选择redis作为默认缓存工具
+     *
      * @param redisConnectionFactory
      * @return
      */
@@ -43,6 +46,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * retemplate相关配置
+     *
      * @param factory
      * @return
      */

@@ -1,10 +1,12 @@
 package com.wind.server.tools;
+
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.*;
 import java.util.Enumeration;
 //https://blog.csdn.net/Mrs_chens/article/details/90475108
+
 /**
  * @Description: 获取IP方法
  * @BelongsProject: Jmccms
@@ -17,7 +19,7 @@ import java.util.Enumeration;
 public class IpUtils {
     private static final String LOCAL_IP = "127.0.0.1";
 
-    public  String getIpAddr(HttpServletRequest request) {
+    public String getIpAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";
         }
@@ -86,7 +88,8 @@ public class IpUtils {
 
     /**
      * 将IPv4地址转换成字节
-     *IPv4地址
+     * IPv4地址
+     *
      * @param text
      * @return byte 字节
      */

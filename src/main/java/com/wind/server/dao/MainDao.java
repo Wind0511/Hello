@@ -22,13 +22,14 @@ public class MainDao {
     @Autowired
     MusicMapper musicMapper;
 
-    public int adminOperationInformation(HttpSession session, HttpServletRequest request,String type){
+    public int adminOperationInformation(HttpSession session, HttpServletRequest request, String type) {
         IpUtils ipUtils = new IpUtils();
-        AdminOperation adminOperation = new AdminOperation(type,ipUtils.getIpAddr(request),new TimeUtil().getTime(),session.getId());
+        AdminOperation adminOperation = new AdminOperation(type, ipUtils.getIpAddr(request), new TimeUtil().getTime(), session.getId());
         return musicMapper.Operations(adminOperation);
     }
-    public int errorCollection(String request,String error){
-        ErrorCollection errorCollection = new ErrorCollection(new TimeUtil().getTime(),request,error);
+
+    public int errorCollection(String request, String error) {
+        ErrorCollection errorCollection = new ErrorCollection(new TimeUtil().getTime(), request, error);
         return musicMapper.ErrorCollection(errorCollection);
     }
 

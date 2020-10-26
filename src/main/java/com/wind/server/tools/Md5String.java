@@ -1,11 +1,12 @@
 package com.wind.server.tools;
 
 import java.security.MessageDigest;
+
 //md5加密
 public class Md5String {
-    public String getMd5(String text){
+    public String getMd5(String text) {
         String res = null;
-        try{
+        try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
             byte[] bytes = messageDigest.digest(text.getBytes());
             String result = "";
@@ -17,7 +18,7 @@ public class Md5String {
                 result += temp;
             }
             return result;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return res;

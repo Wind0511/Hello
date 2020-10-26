@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Logger;
+
 @Service
 public class EmailService {
 
@@ -57,7 +58,7 @@ public class EmailService {
             mailSSLSocketFactory = new MailSSLSocketFactory();
             mailSSLSocketFactory.setTrustAllHosts(true);
         } catch (GeneralSecurityException e) {
-            mainDao.errorCollection("EmailService initProperties",e.toString());
+            mainDao.errorCollection("EmailService initProperties", e.toString());
             e.printStackTrace();
         }
         properties.put("mail.smtp.enable", "true");
@@ -74,13 +75,14 @@ public class EmailService {
         // 使用SSL,企业邮箱必需 end
         return session;
     }
-//发送
+
+    //发送
     public Boolean sendHtmlEmail(String sessionID) {
         boolean lean = false;
         try {
             Session session = initProperties();
             MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(from,"Wind0511"));// 发件人,可以设置发件人的别名
+            mimeMessage.setFrom(new InternetAddress(from, "Wind0511"));// 发件人,可以设置发件人的别名
             // 收件人
             mimeMessage.setRecipients(Message.RecipientType.TO, "857093701@qq.com");
             // 主题
@@ -94,7 +96,7 @@ public class EmailService {
             String code = UUID.randomUUID().toString();
             // 设置内容 getEmailHtml是邮箱内容模板
             MailTemplate mailTemplate = new MailTemplate();
-            bodyPart.setContent(mailTemplate.getEmailHtml(sessionID,code), "text/html; charset=UTF-8");
+            bodyPart.setContent(mailTemplate.getEmailHtml(sessionID, code), "text/html; charset=UTF-8");
             mimeMultipart.addBodyPart(bodyPart);
             // 添加图片&附件
 //            bodyPart = new MimeBodyPart();
@@ -103,21 +105,22 @@ public class EmailService {
             mimeMessage.setContent(mimeMultipart);
             mimeMessage.saveChanges();
             Transport.send(mimeMessage);
-            redisUtil.set(sessionID,code);
+            redisUtil.set(sessionID, code);
             lean = true;
         } catch (MessagingException e) {
-            mainDao.errorCollection("EmailService MessagingException sendHtmlEmail",e.toString());
+            mainDao.errorCollection("EmailService MessagingException sendHtmlEmail", e.toString());
             e.printStackTrace();
             lean = false;
         } catch (UnsupportedEncodingException e) {
-            mainDao.errorCollection("EmailService UnsupportedEncodingException sendHtmlEmail",e.toString());
+            mainDao.errorCollection("EmailService UnsupportedEncodingException sendHtmlEmail", e.toString());
             e.printStackTrace();
             lean = false;
         }
         return lean;
     }
-    public Boolean checkMail(String sessionID,String code){
-        if (code.equals(redisUtil.get(sessionID))){
+
+    public Boolean checkMail(String sessionID, String code) {
+        if (code.equals(redisUtil.get(sessionID))) {
             return true;
         }
         return false;

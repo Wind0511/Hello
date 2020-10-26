@@ -32,9 +32,9 @@ public class MailController {
 
     @ResponseBody
     @RequestMapping("check")
-    public String check(HttpSession session, String code, HttpServletRequest request) {
+    public String check(HttpSession session, String pass, HttpServletRequest request) {
         mainDao.adminOperationInformation(session, request, request.getRequestURI() + ":" + request.getMethod());
-        Boolean b = emailService.checkMail(session.getId(), code);
+        Boolean b = emailService.checkMail(session.getId(), pass);
         return b.toString();
     }
 

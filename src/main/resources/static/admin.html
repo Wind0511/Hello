@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html id="html" lang="en">
+
+<head>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta charset="UTF-8">
+    <title>Admin Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<!--    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>-->
+<!--    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>-->
+    <script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    <!--    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>-->
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <!--    <script th:src="@{/util/musicApi-master/src/music-api}"></script>-->
+    <script>
+
+        function lo() {
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        }
+
+        function mail() {
+            //var name = $('#pass').serialize();
+            alert("请稍后")
+            $.ajax({
+                url: "/mail",
+                type: "POST",
+                // data: name,
+                success: function (res) {
+                    alert("邮件发送成功")
+                    if ("true") {
+                        $('#attation').html("<div class='message' style='font-size: 4px'>" + 发送成功 + "</div>");
+                    } else {
+                        $('#attation').html("<div class='message' style='font-size: 4px;color: red'>" + 发送失败 + "</div>");
+                    }
+                },
+                error: function (jqXHR) {
+                    alert("ERROR:?name = " + jqXHR.status)
+                }
+
+            })
+        }
+        function check() {
+            var pass = $('#pass').serialize();
+            $.ajax({
+                url: "/check",
+                type: "POST",
+                data: pass,
+                success: function (res) {
+                    //window.location.href="/test"
+                    alert("success "+res)
+
+                },
+                error: function (jqXHR) {
+                    alert("ERROR:?name = " + jqXHR.status)
+                }
+
+            })
+        }
+
+    </script>
+<body onload="lo()">
+<div class="container">
+    <div class="info">
+        <h1>AdminLogin</h1>
+    </div>
+</div>
+<div class="form">
+    <div class="thumbnail">
+        <img src="css/hat.svg"/>
+    </div>
+    <div id="attation"></div>
+    <button style="width: 100px" onclick="mail()">发送邮件</button>
+    <form class="register-form">
+        <br>
+        <input id="pass" type="password" placeholder="password" name="pass" onblur="checkPass()"/>
+        <p></p><br>
+    </form>
+    <button onclick="check()">create</button>
+
+</div>
+
+</body>
+
+</html>

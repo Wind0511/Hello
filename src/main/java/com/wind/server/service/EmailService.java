@@ -119,8 +119,8 @@ public class EmailService {
         return lean;
     }
 
-    public Boolean checkMail(String sessionID, String code) {
-        if (code.equals(redisUtil.get(sessionID))) {
+    public Boolean checkMail(String sessionID, String pass) {
+        if (pass.equals(redisUtil.get(sessionID))) {
             return true;
         }
         return false;

@@ -32,11 +32,6 @@ public class MainController {
     @Autowired
     ApiHelper search;
 
-    @RequestMapping("test")
-    public String reg() {
-        return "register";
-    }
-
 
     public String list(int id) {
         return "";

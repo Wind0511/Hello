@@ -223,7 +223,6 @@ public class ApiHelper {
         ListResult listResult = JSON.parseObject(Json, ListPack.class).getResult();
         return listResult;
     }
-
     //                     ___                _---ヘ
 //                    く__,.ヘヽ.　　　　  /　,ー､ 〉
 //            　　　　   　＼ ', !-─‐-i　/　
@@ -241,7 +240,7 @@ public class ApiHelper {
 //            　　　　　 !'〈//｀Ｔ´', ＼ ｀'7'ｰr'
 //            　　　　　 ﾚ'ヽL__|___i,___,ンﾚ|ノ
 //            　　　　　 　  　ﾄ-,/　|___./
-//            　　　　　 　  　'ｰ'　  !_,.:
+//            　　　　　 　  　'ｰ'　  !_,.:                powered by wind0511
 //
     //Json解析区******************************************************************************8
     //得到歌手图片

@@ -25,10 +25,13 @@ import java.util.List;
 
 @Controller
 public class MainController {
+
     @Autowired
     MongoTemplate mongoTemplate;
+
     @Autowired
     MainDao mainDao;
+
     @Autowired
     ApiHelper search;
 

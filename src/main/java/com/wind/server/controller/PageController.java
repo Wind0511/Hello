@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class PageController {
+
     @Autowired
     RedisUtil redisUtil;
 

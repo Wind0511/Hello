@@ -29,13 +29,18 @@ public class ListController {
 
     @Autowired
     MongoTemplate mongoTemplate;
+
     @Autowired
     IpUtils ipUtils;
+
     @Autowired
     RedisUtil redisUtil;
+
     @Autowired
     MainDao mainDao;
-    Md5String md5String = new Md5String();
+
+    Md5String md5String =
+            new Md5String();
 
     @ResponseBody
     @RequestMapping("geTime")

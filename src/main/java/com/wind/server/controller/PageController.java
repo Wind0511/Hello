@@ -25,5 +25,11 @@ public class PageController {
         }
         return "<h1>您不是管理员</h1>";
     }
+    @RequestMapping("t99")
+    public String test2() {
+
+            return "test";
+
+    }
 
 }

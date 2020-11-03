@@ -7,6 +7,7 @@ import com.wind.server.tools.IpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +25,7 @@ public class MailController {
 
     @ResponseBody
     @RequestMapping("mail")
-    public String mail(HttpSession session, HttpServletRequest request) {
+    public String mail(HttpSession session, HttpServletRequest request)  {
         Boolean b = emailService.sendHtmlEmail(session.getId());
         mainDao.adminOperationInformation(session, request, request.getRequestURI() + ":" + request.getMethod());
         return b.toString();
@@ -38,4 +39,9 @@ public class MailController {
         return b.toString();
     }
 
+    @ExceptionHandler
+    public String doError(Exception ex) throws Exception {
+        ex.printStackTrace();
+        return "云端网络错误导致请求无法被接受";
+    }
 }

@@ -27,9 +27,11 @@ public class PageController {
     }
     @RequestMapping("t99")
     public String test2() {
-
             return "test";
-
+    }
+    @RequestMapping("play")
+    public String play() {
+        return "play";
     }
 
 }

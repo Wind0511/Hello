@@ -69,10 +69,10 @@ public class ListController {
     //删除歌单 返回值是删除记录的个数 如果是0就是密码错误如果不是0那就是删除成功 需要歌单名和密码
     @ResponseBody
     @RequestMapping("del")
-    public long del(String name, String pass) {
+    public long del(String id, String pass) {
         Md5String md5String = new Md5String();
         List<Criteria> criteria = new ArrayList<>();
-        criteria.add(Criteria.where("name").is(name));
+        criteria.add(Criteria.where("id").is(id));
         criteria.add(Criteria.where("pass").is(pass));
         Query query = new Query(new Criteria().andOperator(criteria.toArray(new Criteria[]{})));
         return mongoTemplate.remove(query, "music").getDeletedCount();

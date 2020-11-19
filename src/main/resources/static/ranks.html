@@ -277,34 +277,32 @@
     $(document).ready(function () {
 
         $.ajax({
-            type : 'get',
-            dataType : 'json',
-            url : '/getlist?id=19723756',
-            success: function(rec){
+            type: 'get',
+            dataType: 'json',
+            url: '/getlist?id=19723756',
+            success: function (rec) {
                 var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐飙升榜</h2> <div class="more mb_10"><a href="/ranks/down.html">查看完整榜单</a></div> </div> <hr class="mb_15">';
                 var list = rec;
 
 
-                for(var i=0;i<10;i++){
+                for (var i = 0; i < 10; i++) {
 
 
-                    if (i<3){
-                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">'+
-                            '<span class="ls_num ls_num_top">'+(i+1)+'</span><a class="text-ellipsis" target="_play"  href="/music/2.html">'+list[i].songName+'</a></span>'+
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>'+
+                    if (i < 3) {
+                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
+                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     } else {
-                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">'+
-                            '<span class="ls_num ">'+(i+1)+'</span><a class="text-ellipsis" target="_play"  href="/music/2.html">'+list[i].songName+'</a></span>'+
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>'+
+                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
+                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     }
 
 
-
-
-
-                };
+                }
+                ;
                 console.log(html);
                 $("#increase").html(html);
 
@@ -315,32 +313,32 @@
         });
 
         $.ajax({
-            type : 'get',
-            dataType : 'json',
-            url : '/getlist?id=3779629',
-            success: function(rec){
+            type: 'get',
+            dataType: 'json',
+            url: '/getlist?id=3779629',
+            success: function (rec) {
                 var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐新歌榜</h2> <div class="more mb_10"><a href="/ranks/down.html">查看完整榜单</a></div> </div> <hr class="mb_15">';
                 var list = rec;
 
 
-                for(var i=0;i<10;i++){
+                for (var i = 0; i < 10; i++) {
 
 
-                    if (i<3){
-                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">'+
-                            '<span class="ls_num ls_num_top">'+(i+1)+'</span><a class="text-ellipsis" target="_play"  href="/music/2.html">'+list[i].songName+'</a></span>'+
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>'+
+                    if (i < 3) {
+                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
+                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     } else {
-                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">'+
-                            '<span class="ls_num ">'+(i+1)+'</span><a class="text-ellipsis" target="_play"  href="/music/2.html">'+list[i].songName+'</a></span>'+
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>'+
+                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
+                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     }
 
 
-
-                };
+                }
+                ;
                 console.log(html);
                 $("#new").html(html);
 
@@ -352,32 +350,32 @@
 
 
         $.ajax({
-            type : 'get',
-            dataType : 'json',
-            url : '/getlist?id=3778678',
-            success: function(rec){
+            type: 'get',
+            dataType: 'json',
+            url: '/getlist?id=3778678',
+            success: function (rec) {
                 var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐热歌榜</h2> <div class="more mb_10"><a href="/ranks/down.html">查看完整榜单</a></div> </div> <hr class="mb_15">';
                 var list = rec;
 
 
-                for(var i=0;i<10;i++){
+                for (var i = 0; i < 10; i++) {
 
 
-                    if (i<3){
-                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">'+
-                            '<span class="ls_num ls_num_top">'+(i+1)+'</span><a class="text-ellipsis" target="_play"  href="/music/2.html">'+list[i].songName+'</a></span>'+
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>'+
+                    if (i < 3) {
+                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
+                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     } else {
-                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">'+
-                            '<span class="ls_num ">'+(i+1)+'</span><a class="text-ellipsis" target="_play"  href="/music/2.html">'+list[i].songName+'</a></span>'+
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>'+
+                        html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
+                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     }
 
 
-
-                };
+                }
+                ;
                 console.log(html);
                 $("#hot").html(html);
 

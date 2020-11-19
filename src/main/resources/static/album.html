@@ -41,9 +41,11 @@
                     <div class='col-md-4 col-sm-8 t_align_c'>
                         <div class='search-box mt_15'>
                             <form role='search' class='relative type_2' id='search_form' method='get'
-                                  action='/search.html?num=60'><input type='text' class='d_none' name='type' value='1'><input
+                                  action='/search.html?num=60'><input type='text' class='d_none' name='type'
+                                                                      value='1'><input
                                     type='text' class='full_width' name='name' placeholder='搜索'>
-                                <button class='search_button tr_all_hover' style='background-image: url(/img/search.jpg)'></button>
+                                <button class='search_button tr_all_hover'
+                                        style='background-image: url(/img/search.jpg)'></button>
                             </form>
                         </div>
                     </div>
@@ -184,9 +186,20 @@
                 <section class="col-sm-8 ">
                     <div class="row clearfix">
                         <div class="col-sm-4">
-                            <div id="pic"  class="photoframe a_cover"></div>
+                            <div id="pic" class="photoframe a_cover"></div>
                         </div>
-                        <div class="col-sm-7"><hr><hr><hr><hr><hr><h1 id="name" class="mt_10"></h1><hr><hr><hr><hr><hr>
+                        <div class="col-sm-7">
+                            <hr>
+                            <hr>
+                            <hr>
+                            <hr>
+                            <hr>
+                            <h1 id="name" class="mt_10"></h1>
+                            <hr>
+                            <hr>
+                            <hr>
+                            <hr>
+                            <hr>
 
                         </div>
                     </div>
@@ -285,7 +298,7 @@
                 paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
             }
             var returnValue = paraObj[paras.toLowerCase()];
-            if (typeof(returnValue) == "undefined") {
+            if (typeof (returnValue) == "undefined") {
                 return "1";
             } else {
 
@@ -295,18 +308,18 @@
 
 
         var id = request("id");
-        if(id==1){
+        if (id == 1) {
             id = 96777500;
         }
 
         $.ajax({
-            type : 'get',
-            dataType : 'text',
-            url : '/sp?id='+id,
-            success: function(rec){
+            type: 'get',
+            dataType: 'text',
+            url: '/sp?id=' + id,
+            success: function (rec) {
 
 
-                var html = '<img src="'+rec+'" class="tr_all_hover ">';
+                var html = '<img src="' + rec + '" class="tr_all_hover ">';
 
                 $("#pic").html(html);
 
@@ -318,66 +331,59 @@
         });
 
 
-
         $.ajax({
-            type : 'get',
-            dataType : 'json',
-            url : '/album?id='+id,
-            success: function(rec){
+            type: 'get',
+            dataType: 'json',
+            url: '/album?id=' + id,
+            success: function (rec) {
 
 
-
-                var list=rec;
+                var list = rec;
                 var html = '';
                 var num = list.length;
-                var totalPage = parseInt(num/30+1); //一共多少页
+                var totalPage = parseInt(num / 30 + 1); //一共多少页
                 var currentPage = parseInt(request("page"));//当前页码
-                var everylength = currentPage*30;
+                var everylength = currentPage * 30;
                 var name = list[0].albumName;
                 $("#name").html(name);
 
 
-
-
-                if (currentPage==totalPage){
+                if (currentPage == totalPage) {
                     everylength = list.length;
 
                 }
 
-                for (var i=(currentPage-1)*30;i<everylength;i++){
+                for (var i = (currentPage - 1) * 30; i < everylength; i++) {
 
-                    html +='<div class="mb_10 clearfix relative play_box"> <div class="row clearfix song_list"><span class="col-sm-5 col-xs-8">'+
-                        '<span class="ls_num ls_num_top">'+(i+1)+'</span><a class="text-ellipsis" target="_play" href="/music/221.html">'+list[i].songName+'</a></span>'+
-                        '<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer" target="_sing" href="/genre/gfbz.html">'+list[i].albumName+'</a></span>'+
+                    html += '<div class="mb_10 clearfix relative play_box"> <div class="row clearfix song_list"><span class="col-sm-5 col-xs-8">' +
+                        '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play" href="/music/221.html">' + list[i].songName + '</a></span>' +
+                        '<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer" target="_sing" href="/genre/gfbz.html">' + list[i].albumName + '</a></span>' +
                         '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="221"  href="javascript:;">播</a></span>   </div> </div>'
 
                 }
 
-                html +="<div class='col-sm-6 t_align_r'> <ul class='horizontal_list pull-right page_list'> <ul class='pagination'>"
-                if(currentPage==1){
+                html += "<div class='col-sm-6 t_align_r'> <ul class='horizontal_list pull-right page_list'> <ul class='pagination'>"
+                if (currentPage == 1) {
                     html += "<li class='disabled'><span>«</span></li>"
+                } else {
+                    html += "<li> <a href = '/list.html?id=" + id + "&page=" + (currentPage + 1) + "'>«</a></li>"
                 }
-                else {
-                    html += "<li> <a href = '/list.html?id="+id+"&page="+(currentPage+1)+"'>«</a></li>"
-                }
 
 
-                for(var i=0;i<num/30;i++){
+                for (var i = 0; i < num / 30; i++) {
 
-                    if (i+1 ==currentPage){
-                        html += "<li class = 'active' ><span > " +currentPage+ "</span></li>"
-                    }
-                    else {
-                        html += "<li> <a href = '/list.html?id="+id+"&page="+(i+1)+"'>"+(i+1)+"</a></li>"
+                    if (i + 1 == currentPage) {
+                        html += "<li class = 'active' ><span > " + currentPage + "</span></li>"
+                    } else {
+                        html += "<li> <a href = '/list.html?id=" + id + "&page=" + (i + 1) + "'>" + (i + 1) + "</a></li>"
                     }
 
                 }
 
-                if(currentPage==totalPage){
+                if (currentPage == totalPage) {
                     html += "<li class='disabled'><span>»</span></li>"
-                }
-                else {
-                    html += "<li> <a href = '/list.html?id="+id+"&page="+(currentPage+1)+"'>»</a></li>"
+                } else {
+                    html += "<li> <a href = '/list.html?id=" + id + "&page=" + (currentPage + 1) + "'>»</a></li>"
                 }
 
 //                        html += "<li class='disabled'><span>«</span></li> <li class = 'active' > <span > 1</span></li> <li> <a href = '/search/page/2.html?type=1&amp;keys=h'>2</a></li> <li> <a href = '/search/page/3.html?type=1&amp;keys=h'>3</a></li> <li> <a href = '/search/page/4.html?type=1&amp;keys=h'>4</a></li> <li> <a href = '/search/page/5.html?type=1&amp;keys=h'>5</a></li> <li class = 'disabled' > <span>...</span></li> <li><a href='/search/page/14.html?type=1&amp;keys=h'>14</a></li> <li><a href='/search/page/2.html?type=1&amp;keys=h'>»</a></li>"

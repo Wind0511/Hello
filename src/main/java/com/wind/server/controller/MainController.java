@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -161,12 +162,14 @@ public class MainController {
     @ResponseBody
     public String testMongo() {
         SingerSong singerSong = null;
+        List<Song> songs=null;
         try {
             singerSong = search.singer(2116);
+            songs= singerSong.getHotSongs();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        List<Song> songs = singerSong.getHotSongs();
+
         List<SearchInfo> searchInfos = new ArrayList<>();
         for (int i = 0; i < songs.size(); i++) {
             SearchInfo searchInfo = new SearchInfo();
@@ -178,11 +181,13 @@ public class MainController {
             searchInfo.setSongId(songs.get(i).getId());
             searchInfos.add(searchInfo);
         }
+
         SaveList saveList = new SaveList();
+        saveList.setId(UUID.randomUUID().toString());
         saveList.setSearchInfos(searchInfos);
-        saveList.setName("狗子");
+        saveList.setName("狗子77");
         Md5String md5String = new Md5String();
-        saveList.setPass(md5String.getMd5(System.currentTimeMillis() + ""));
+        saveList.setPass(md5String.getMd5("123"));
         mongoTemplate.insert(saveList, "music");
         return "ok";
     }

@@ -4,6 +4,7 @@ public class Select {
     Result result;
     int code;
 
+
     public Result getResult() {
         return result;
     }

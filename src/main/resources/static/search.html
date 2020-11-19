@@ -1,0 +1,794 @@
+<html lang="en" class="csstransforms csstransforms3d csstransitions"><!--<![endif]-->
+<head><title>音乐搜索 - JYmusic音乐管理系统-DJ音乐系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="keywords" content="JYmusic,JYmusic音乐管理程序,php音乐程序,原创音乐程序,音乐程序,dj舞曲程序,音乐程序，音乐管理程序，舞曲程序">
+    <meta name="description"
+          content="JYmusic是Php+Mysql开发的一款开源的跨平台音乐管理系统,采用国内最优秀php框架thinkphp。程序完全免费，稳定，易于扩展且具有超强大负载能力，完全可以满足音乐、DJ、音乐分享、音乐资讯站等使用。">
+    <meta name="author" content="JYmusic音乐管理系统">
+    <link type="image/x-ico; charset=binary" rel="music icon" href="img/favicon.ico"><!--Css-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jy.css?1.0.0">
+    <link rel="stylesheet" type="text/css" href="css/plugs.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="all"><!--js-->
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            window.JY = {
+                "root": "/",
+                "public": "/public",
+                "domains": {"home": "/", "api": "/api", "user": "/user", "article": "/article", "mobile": ""},
+                "deep": "/",
+                "model": ["2", "html"],
+                "user_active_url": "/user/active.html"
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="http://v2.jyuu.cn/public/static/libs/layer/skin/default/layer.css?v=3.0.3303"
+          id="layuicss-skinlayercss">
+</head>
+<body style=""><!--布局-->
+<div class="wide_layout relative w_xs_auto"><!-- 头部 -->
+    <header class='header'><!--头顶部-->
+        <section class='h_top hidden-xs'>
+            <div class='container'>
+                <div class='row clearfix'>
+                    <div class='col-md-3 col-sm-4'><a href='/' class='pull-left logo mt_15'><img
+                            src='img/logo.jpg' alt='JYmusic'></a></div>
+                    <div class='col-md-4 col-sm-8 t_align_c'>
+                        <div class='search-box mt_15'>
+                            <form role='search' class='relative type_2' id='search_form' method='get'
+                                  action='/search.html?num=60'><input type='text' class='d_none' name='type' value='1'><input
+                                    type='text' class='full_width' name='name' placeholder='搜索'>
+                                <button class='search_button tr_all_hover' style='background-image: url(/img/search.jpg)'></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class='col-md-5 col-sm-8 t_align_c d_xs_none'>
+                        <ul class=' clearfix users_nav'>
+                            <li><img src='img/logo.jpg'>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!--头底部-->
+        <section class='h_bot_part'>
+            <div class='menu_wrap'>
+                <div class='container'>
+                    <div class='clearfix row'>
+                        <div class='col-xs-4 hidden-md hidden-lg hidden-sm'><a href='/'
+                                                                               class='pull-left logo p_vr_0'><img
+                                src='img/logo.jpg' alt='JYmusic'></a></div>
+                        <div class='col-sm-12 col-xs-8'>
+                            <nav role='navigation'>
+                                <div class='navbar-header'>
+                                    <button type='button' class='navbar-toggle collapsed bg_scheme_color mt_0'
+                                            data-toggle='collapse' data-target='#navbar' aria-expanded='false'
+                                            aria-controls='navbar'><span class='sr-only'>切换导航</span><span
+                                            class='icon-bar'></span><span class='icon-bar'></span><span
+                                            class='icon-bar'></span></button>
+                                </div>
+                                <div id='navbar' class='collapse navbar-collapse '>
+                                    <ul class='nav navbar-nav nav_menu full_width  relative'>
+                                        <li class='t-nav current'><a href='/' target='_self' class=''>
+                                            首页 </a></li>
+                                        <li class='t-nav '><a href='/album.html' target='_self' class=''>
+                                            专辑 </a></li>
+                                        <li class='t-nav '><a href='/genre.html' target='_self' class=''>
+                                            歌单管理 </a></li>
+                                        <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
+                                            歌曲排行 </a></li>
+                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
+                                            音乐资讯 </a></li>
+                                        <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
+                                                                                                    href='#'
+                                                                                                    class='pt_5 color_light bg_scheme_color'><span
+                                                class='d_inline_middle shop_icon'><i class='jy jy-like jy-2x'></i><span
+                                                class='count tr_delay_hover type_2 circle t_align_c'>10</span></span><b>每日推荐</b></a>
+                                            <div class='songs-day-hot top_arrow tr_all_hover '>
+                                                <div class=' sc_header'>每日推荐</div>
+                                                <ul class='products_list'>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1105.html'>李宗盛 - 山丘
+                                                                (Live)</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1105'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1106.html'>赵已然 - 再回首</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1106'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1107.html'>朴树 - 送别</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1107'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1093.html'>李志 -
+                                                                山阴路的夏天</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1093'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1094.html'>万晓利 - 老狗</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1094'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1095.html'>谣乐队 -
+                                                                唱歌的孩子</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1095'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header><!-- /头部 --><!-- 主体 -->
+    <div class="page_content_offset">
+        <div class="container">
+            <div class="row clearfix"><!--搜索列表-->
+                <section class="col-sm-10 col-sm-offset-1">
+                    <div class="clearfix"><h3 id="about" class="pull-left pt_10"> 搜索结果 </h3>
+                        <ul class="tabs_nav pull-right">
+                            <li class="active"><a href="javascript:;" class="d_block ">歌曲</a></li>
+                            <li><a href="/search.html" data-type="3" class="d_block change-search">搜索相关专辑</a></li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="tab-content mt_20">
+                        <div class="tab-pane fade in active">
+
+
+                            <!--分页-->
+
+
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ls_num_top">1</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/8.html">情藏</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/8.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="8" data-action="fav"-->
+                                                                                <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="8"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ls_num_top">2</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/11.html">夜袭</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/11.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="11" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="11"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ls_num_top">3</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/21.html">昔时</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/21.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="21" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="21"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">4</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/45.html">言寸心</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/45.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="45" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="45"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">5</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/55.html">献天缘</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/55.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="55" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="55"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">6</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/76.html">丹青客</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/76.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="76" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="76"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">7</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/99.html">梦回兰若</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/99.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="99" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="99"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">8</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/103.html">戏梦雁丘</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/103.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="103" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="103"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">9</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/105.html">乱舞江山</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/105.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="105" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="105"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">10</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/114.html">笑傲万世</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/114.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="114" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="114"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">11</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/117.html">一念相思</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/117.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="117" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="117"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">12</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/134.html">梦遣看花人</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/134.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="134" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="134"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">13</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/150.html">不若相忘·记范西屏</a>-->
+                                    <!--</div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/7.html">HITA</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/150.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="150" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="150"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">14</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/155.html">晴·殇（Cover：烟花Show/梦岚）</a>-->
+                                    <!--</div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/9.html">小曲儿</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yczfl.html">原创古风</a></span><span class="col-sm-2 col-xs-2 ls_btns"><a-->
+                                        <!--class="hidden-xs" target="_down" href="/down/155.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="155" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="155"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">15</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/183.html">Stay With Me</a>-->
+                                    <!--</div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/81.html">李玟</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yxlx.html">原创流行</a></span><span-->
+                                        <!--class="col-sm-2 col-xs-2 ls_btns"><a class="hidden-xs" target="_down"-->
+                                                                             <!--href="/down/183.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="183" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="183"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">16</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/186.html">Say a lil-->
+                                        <!--something</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/84.html">萧敬腾</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yxlx.html">原创流行</a></span><span-->
+                                        <!--class="col-sm-2 col-xs-2 ls_btns"><a class="hidden-xs" target="_down"-->
+                                                                             <!--href="/down/186.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="186" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="186"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">17</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/189.html">Not Your Average-->
+                                        <!--Thug</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/87.html">王力宏</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yxlx.html">原创流行</a></span><span-->
+                                        <!--class="col-sm-2 col-xs-2 ls_btns"><a class="hidden-xs" target="_down"-->
+                                                                             <!--href="/down/189.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="189" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="189"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">18</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/190.html">Miss You Night-->
+                                        <!--and Day</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/88.html">王菲</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yxlx.html">原创流行</a></span><span-->
+                                        <!--class="col-sm-2 col-xs-2 ls_btns"><a class="hidden-xs" target="_down"-->
+                                                                             <!--href="/down/190.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="190" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="190"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">19</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/191.html">YOU+ME (English-->
+                                        <!--Version)</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/89.html">蔡诗芸</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yxlx.html">原创流行</a></span><span-->
+                                        <!--class="col-sm-2 col-xs-2 ls_btns"><a class="hidden-xs" target="_down"-->
+                                                                             <!--href="/down/191.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="191" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="191"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="mb_10 clearfix relative play_box">-->
+                                <!--<div class="row clearfix song_list">-->
+                                    <!--<div class="col-sm-5 col-xs-8"><span class="ls_num ">20</span><a-->
+                                            <!--class="text-ellipsis" target="_play" href="/music/192.html">Now That You-->
+                                        <!--Can't Have Me</a></div>-->
+                                    <!--<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer"-->
+                                                                              <!--target="_sing"-->
+                                                                              <!--href="/artist/90.html">吉克隽逸</a></span><span-->
+                                        <!--class="col-sm-2 hidden-xs singer"><a-->
+                                        <!--href="/genre/yxlx.html">原创流行</a></span><span-->
+                                        <!--class="col-sm-2 col-xs-2 ls_btns"><a class="hidden-xs" target="_down"-->
+                                                                             <!--href="/down/192.html"><i-->
+                                        <!--class="jy jy-cloud-down-f"></i></a><a data-id="192" data-action="fav"-->
+                                                                              <!--href="javascript:;"><i-->
+                                        <!--class="jy jy-like"></i></a><a class="jp-play-me " data-id="192"-->
+                                                                      <!--href="javascript:;"><i class="jy jy-play"></i></a></span>-->
+                                <!--</div>-->
+                                <!--<hr class="l_hr">-->
+                            <!--</div>-->
+                            <!--<div class="row clearfix mb_5">-->
+                                <!--<div class="col-sm-6"><span class="page_total">共查询相关歌曲【269】个</span></div>-->
+                                <!--<div class="col-sm-6 t_align_r">-->
+                                    <!--<ul class="horizontal_list pull-right page_list">-->
+                                        <!--<ul class="pagination">-->
+                                            <!--<li class="disabled"><span>«</span></li>-->
+                                            <!--<li class="active"><span>1</span></li>-->
+                                            <!--<li><a href="/search/page/2.html?type=1&amp;keys=h">2</a></li>-->
+                                            <!--<li><a href="/search/page/3.html?type=1&amp;keys=h">3</a></li>-->
+                                            <!--<li><a href="/search/page/4.html?type=1&amp;keys=h">4</a></li>-->
+                                            <!--<li><a href="/search/page/5.html?type=1&amp;keys=h">5</a></li>-->
+                                            <!--<li class="disabled"><span>...</span></li>-->
+                                            <!--<li><a href="/search/page/14.html?type=1&amp;keys=h">14</a></li>-->
+                                            <!--<li><a href="/search/page/2.html?type=1&amp;keys=h">»</a></li>-->
+                                        <!--</ul>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </section><!--侧边栏--></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+
+
+//        $('.change-search').each(function () {
+//        var $this = $(this);
+//        var url = $this.attr('href');
+//        if (url.indexOf('?') > 0) {
+//            url += '&';
+//        } else {
+//            url += '?' + query;
+//        }
+//        url += 'type=' + $this.data('type') + "&keys=h";
+//        $this.attr('href', url);
+//    });
+
+        $(document).ready(function () {
+
+
+            // 获取参数
+            function request(paras) {
+                var url = location.href;
+                var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+                var paraObj = {};
+                for (var i = 0; j = paraString[i]; i++) {
+//                    alert(j);
+                    paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
+                }
+                var returnValue = paraObj[paras.toLowerCase()];
+                if (typeof(returnValue) == "undefined") {
+                    return "1";
+                } else {
+
+                    return returnValue;
+                }
+            }
+
+
+            var resul = decodeURI(request("name"));
+
+            $("#about").html("[ "+ resul+" ]的相关音乐")
+
+
+
+            $.ajax({
+                type : 'get',
+                dataType : 'json',
+                url : '/search?name="'+request("name")+'"&num=60',
+                success: function(rec){
+
+
+                    var html = '';
+                    var list = rec;
+
+                    var num = 60;
+
+                    if(list.length<60){
+                        num = list.length;
+                    }
+
+
+                    var totalPage = parseInt(num/10); //一共多少页
+                    var currentPage = parseInt(request("page"));//当前页码
+                    var everylength = currentPage*10;
+
+
+                    if (currentPage==totalPage){
+                        everylength = list.length;
+
+                    }
+
+
+                    for(var i=(currentPage-1)*10;i<everylength;i++){
+
+
+                        html += "<div class='mb_10 clearfix relative play_box'>" +
+                            "<div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'>"+
+                            "<span class='ls_num ls_num_top'>"+(i+1)+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                            "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                            "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id="+list[i].singerId+"'>"+list[i].singerName+"</a></span>"+
+                            "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                            "<a                                                href='/album.html?id="+list[i].albumId+"'>"+list[i].albumName+
+                            "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                            "<a class='jp-play-me'  href='/down/1105.html'>"+
+                            "播</a></span></div>"+
+                            "<hr class='l_hr'></div>";
+
+                    };
+
+
+                    html += "<div class='row clearfix mb_5'><div class='col-sm-6'><span class='page_total'>共查询相关歌曲【"+num+"】个</span></div><div class='col-sm-6 t_align_r'> <ul class='horizontal_list pull-right page_list'> <ul class='pagination'>"
+
+                    if(currentPage==1){
+                        html += "<li class='disabled'><span>«</span></li>"
+                    }
+                    else {
+                        html += "<li> <a href = '/search.html?num=60&type=1&name="+request("name")+"&page="+(currentPage+1)+"'>«</a></li>"
+                    }
+
+
+                    for(var i=0;i<num/10;i++){
+
+                        if (i+1 ==currentPage){
+                            html += "<li class = 'active' ><span > " +currentPage+ "</span></li>"
+                        }
+                        else {
+                            html += "<li> <a href = '/search.html?num=60&type=1&name="+request("name")+"&page="+(i+1)+"'>"+(i+1)+"</a></li>"
+                        }
+
+                    }
+
+                    if(currentPage==totalPage){
+                        html += "<li class='disabled'><span>»</span></li>"
+                    }
+                    else {
+                        html += "<li> <a href = '/search.html?num=60&type=1&name="+request("name")+"&page="+(currentPage+1)+"'>»</a></li>"
+                    }
+
+//                        html += "<li class='disabled'><span>«</span></li> <li class = 'active' > <span > 1</span></li> <li> <a href = '/search/page/2.html?type=1&amp;keys=h'>2</a></li> <li> <a href = '/search/page/3.html?type=1&amp;keys=h'>3</a></li> <li> <a href = '/search/page/4.html?type=1&amp;keys=h'>4</a></li> <li> <a href = '/search/page/5.html?type=1&amp;keys=h'>5</a></li> <li class = 'disabled' > <span>...</span></li> <li><a href='/search/page/14.html?type=1&amp;keys=h'>14</a></li> <li><a href='/search/page/2.html?type=1&amp;keys=h'>»</a></li>"
+
+                        html += " </ul> </ul> </div> </div>"
+
+//                        <li class='disabled'><span>«</span></li>
+//                    <li class='active'><span>1</span></li>
+//                        <li><a href='/search/page/2.html?type=1&amp;keys=h'>2</a></li>
+//                        <li><a href='/search/page/3.html?type=1&amp;keys=h'>3</a></li>
+//                        <li><a href='/search/page/4.html?type=1&amp;keys=h'>4</a></li>
+//                        <li><a href='/search/page/5.html?type=1&amp;keys=h'>5</a></li>
+//                        <li class='disabled'><span>...</span></li>
+//                    <li><a href='/search/page/14.html?type=1&amp;keys=h'>14</a></li>
+//                        <li><a href='/search/page/2.html?type=1&amp;keys=h'>»</a></li>
+//
+
+                    $(".tab-pane").html(html);
+
+
+
+                },
+                error: function () {
+                    alert('错了');
+                }
+            });
+
+        });
+
+
+
+
+
+    </script><!-- /主体 --><!-- 底部 -->
+    <footer id='footer'>
+        <div class='container hidden-xs'>
+            <div class='row clearfix'>
+                <div class='col-sm-6'><h3>music音乐网站</h3>
+                    <p>
+                        music是李尚泽小组开发的一款音乐系统。程序完全免费，稳定，易于扩展且具有超强大负载能力，完全可以满足音乐、DJ、音乐分享、音乐资讯站等使用。</p>
+                </div>
+                <div class='col-sm-2'><h3>关于网站</h3>
+                    <ul class='vertical_list'>
+                        <li><a class='tr_delay_hover' href='#'>友情链接</a></li>
+                        <li><a class='tr_delay_hover' href='#'>联系我们</a></li>
+                        <li><a class='tr_delay_hover' href='#'>版权声明</a></li>
+                        <li><a class='tr_delay_hover' href='#'>关于music</a></li>
+                    </ul>
+                </div>
+                <div class='col-sm-2'><h3>帮助中心</h3>
+                    <ul class='vertical_list'>
+                        <li><a class='tr_delay_hover' href='#'>认证音乐人</a></li>
+                        <li><a class='tr_delay_hover' href='#'>反馈建议</a></li>
+                        <li><a class='tr_delay_hover' href='#'>常见问题</a></li>
+                        <li><a class='tr_delay_hover' href='#'>如何注册</a></li>
+                    </ul>
+                </div>
+                <div class='col-sm-2'><h3>联系我们</h3>
+                    <ul class='vertical_list'>
+                        <li><i class='jy jy-envelope pull-left'></i>1053593561@qq.com</li>
+                        <li><i class='jy jy-share-square pull-left'></i>QQ: 1053593561</li>
+                        <li><i class='jy jy-phone pull-left'></i>18888888889</li>
+                        <li><i class='jy jy-music pull-left'></i><a class='contact_e' href='#'>music音乐网</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class='row clearfix'><!--版权的部分 请务必保留版权 谢谢合作！-->
+                <div class='footer_bottom_part col-sm-6 '><p class='pull-left'>人才招聘中 </p></div>
+                <div class='col-sm-6 mb_10'><!--图标-->
+                    <ul class='clearfix horizontal_list social_icons pull-right'>
+                        <li class='html5 relative'><span class='tooltip tr_all_hover  '>五险一金</span><a
+                                class=' t_align_c tr_delay_hover ' href='javascript:;'>加</a>
+                        </li>
+                        <li class='css3 ml_5 relative'><span class='tooltip tr_all_hover  '>待遇从优</span><a
+                                class='  t_align_c tr_delay_hover' href='javascript:;'>入</a>
+                        </li>
+                        <li class='android ml_5 relative'><span class='tooltip tr_all_hover  '>带薪休假</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>我</a>
+                        </li>
+                        <li class='iPhone ml_5 relative'><span class='tooltip tr_all_hover  '>时间自由</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>们</a>
+                        </li>
+                        <li class='rss ml_5 relative'><span class='tooltip tr_all_hover  '>热爱音乐</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>吧</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!-- /底部 --></div>
+<link rel="stylesheet" href="css/player.css?v=1.0" type="text/css">
+</div>
+
+<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="js/jyplayer.js?1.01"></script>
+<script type="text/javascript" src="js/app.js?0.1"></script>
+<script type="text/javascript" src="js/plugs.min.js"></script>
+<script type="text/javascript" src="js/common.js?v=1.0"></script>
+
+<script src="js/layer.js"></script>
+
+
+</body>
+</html>

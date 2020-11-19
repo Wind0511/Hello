@@ -114,7 +114,9 @@ public class ApiHelper {
     //得到专辑图片
     public String getPic(int id) throws IOException {
 
-        URL u = new URL("https://music.163.com/api/song/detail/?id=" + id + "&ids=[" + id + "]");
+//        URL u = new URL("https://music.163.com/api/song/detail/?id=" + id + "&ids=[" + id + "]");
+        URL u = new URL("http://music.163.com/api/album/"+id);
+        System.err.println(u.toString());
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
@@ -353,8 +355,8 @@ public class ApiHelper {
 
             Json = "{\"result\":" + Json + "}";
             Select select = JSON.parseObject(Json, Select.class);
-            Songs songs = select.getResult().getSongs().get(0);
-            return songs.getAlbum().getPicURL();
+System.err.println(Json);
+            return select.getResult().getAlbum().getPicURL();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper editInfo", e.toString());
             return null;

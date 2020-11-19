@@ -29,9 +29,18 @@ public class PageController {
     public String test2() {
             return "test";
     }
-    @RequestMapping("play")
-    public String play() {
-        return "play";
+    @RequestMapping("index")
+    public String index() {
+        return "index";
     }
+
+
+
+
+
+
+
+
+
 
 }

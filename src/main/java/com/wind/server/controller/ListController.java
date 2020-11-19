@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,13 +70,27 @@ public class ListController {
     //删除歌单 返回值是删除记录的个数 如果是0就是密码错误如果不是0那就是删除成功 需要歌单名和密码
     @ResponseBody
     @RequestMapping("del")
-    public long del(String id, String pass) {
-        Md5String md5String = new Md5String();
-        List<Criteria> criteria = new ArrayList<>();
-        criteria.add(Criteria.where("id").is(id));
-        criteria.add(Criteria.where("pass").is(pass));
-        Query query = new Query(new Criteria().andOperator(criteria.toArray(new Criteria[]{})));
-        return mongoTemplate.remove(query, "music").getDeletedCount();
+    public String del(String id, String pass, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        try {
+            if (redisUtil.get(session.getId()).equals(pass)) {
+                Md5String md5String = new Md5String();
+                Query query = new Query(Criteria.where("_id").is(id));
+                return mongoTemplate.remove(query, "music").getDeletedCount()+"";
+            } else {
+                Md5String md5String = new Md5String();
+                List<Criteria> criteria = new ArrayList<>();
+                criteria.add(Criteria.where("_id").is(id));
+                criteria.add(Criteria.where("pass").is(pass));
+                Query query = new Query(new Criteria().andOperator(criteria.toArray(new Criteria[]{})));
+                return mongoTemplate.remove(query, "music").getDeletedCount()+"";
+            }
+
+        } catch (Exception e) {
+            mainDao.errorCollection(request.getRequestURI(), "你不是管理员,或密码错误 " + e.toString());
+            return "你不是管理员,或密码错误";
+        }
+
     }
 
     //编辑后更改歌单 返回值如果是0就是密码错误如果不是0那就是更改成功  需要歌单名，密码，歌单SearchInfo形式的JSON
@@ -95,7 +110,7 @@ public class ListController {
     @RequestMapping("get")
     @ResponseBody
     public String get(String id) {
-        Query query = new Query(Criteria.where("id").is(id));
+        Query query = new Query(Criteria.where("_id").is(id));
         SaveList saveList = mongoTemplate.findOne(query, SaveList.class, "music");
         saveList.setPass("");
         saveList.setInform("");
@@ -157,7 +172,7 @@ public class ListController {
             if (redisUtil.get(session.getId()).equals(adminpass)) {
                 List<Criteria> criteria = new ArrayList<>();
                 criteria.add(Criteria.where("inform").is(inform));
-                criteria.add(Criteria.where("id").is(id));
+                criteria.add(Criteria.where("_id").is(id));
                 Query query = new Query(new Criteria().andOperator(criteria.toArray(new Criteria[]{})));
                 SaveList saveList = mongoTemplate.findOne(query, SaveList.class, "music");
                 if (saveList == null) {

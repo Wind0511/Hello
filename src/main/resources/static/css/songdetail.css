@@ -1,0 +1,169 @@
+.page_songdetail {
+	position: fixed;
+	top: 100%;
+	right: 100%;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	overflow: auto;
+	transition: all 1s ease;
+	z-index: 8;
+}
+
+.page_songdetail>.maincontainer {
+	width: 1000px;
+	margin: 50px auto;
+	position: relative;
+}
+
+.page_songdetail>.maincontainer>.compressbtn {
+	position: absolute;
+	top: 0;
+	left: 101%;
+	padding: 5px 10px;
+	border: 1px solid #dee2e3;
+	border-radius: 5px;
+	font-size: 1rem;
+	background-color: #f8f9fb;
+	cursor: pointer;
+}
+
+.page_songdetail>.maincontainer>.compressbtn:hover {
+	background-color: #f5f5f7;
+}
+
+.page_songdetail>.maincontainer>.lyricsection,
+.page_songdetail>.maincontainer>.discsection {
+	float: left;
+	height: 400px;
+}
+
+.page_songdetail>.maincontainer>.lyricsection {
+	width: 55%;
+}
+
+.page_songdetail>.maincontainer>.discsection {
+	width: 45%;
+	position: relative;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrcinfo {
+	height: 100px;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrcinfo>.info_song,
+.page_songdetail>.maincontainer>.lyricsection>.lrcinfo>.info_album {
+	max-width: 100%;
+	margin-bottom: 10px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrcinfo>.info_song>.songname {
+	font-size: 1rem;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrcinfo>.info_song>.label {
+	display: inline-block;
+	margin: 0 6px;
+	padding: 2px;
+	border: 1px solid #f00;
+	color: #f00;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrcinfo>.info_album>span {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrccontainer {
+	height: calc(100% - 100px);
+	border-right: 1px solid #ccc;
+	overflow: auto;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrccontainer>.lrcbox>.lrc {
+	padding: 9px 0;
+	color: #202016;
+}
+
+.page_songdetail>.maincontainer>.lyricsection>.lrccontainer>.lrcbox>.lrc.current {
+	text-shadow: 0 0 3px #333;
+	color: #f9fcf5;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_arc {
+	width: 320px;
+	height: 320px;
+	border-radius: 50%;
+	background-color: rgba(251, 251, 251, 0.08);
+	background-image: url("images/disc.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 68%;
+	border: 3px solid rgba(251, 251, 251, 0.08);
+	overflow: hidden;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_arc>.poster {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_arc>.poster>img {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_btns {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_btns>.btn {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 5px 10px;
+	border: 1px solid #c1c5c6;
+	border-radius: 5px;
+	background-color: #f6fafb;
+	cursor: pointer;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_btns>.btn:hover {
+	background-color: #f5f5f7;
+}
+
+.g_blurbg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: #fff;
+	background-image: url("../images/poster001.jpg");
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background-size: 60% 60%;
+	filter: blur(50px);
+	z-index: -1;
+}
+
+.page_songdetail>.maincontainer>.discsection>.disc_arc {
+	animation: rotateARC 10s linear infinite;
+	animation-play-state:paused;
+}
+
+@keyframes rotateARC {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

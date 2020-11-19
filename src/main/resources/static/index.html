@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang='en' class='csstransforms csstransforms3d csstransitions'><!--<![endif]-->
+<head><title>JYmusic音乐管理系统-DJ音乐系统</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <meta content='telephone=no' name='format-detection'>
+    <meta name='keywords' content='music,music音乐管理程序,原创音乐程序,音乐程序,dj舞曲程序,音乐程序，音乐管理程序，舞曲程序'>
+    <meta name='description'
+          content=''>
+    <meta name='author' content='music音乐管理系统'>
+    <link type='image/x-ico; charset=binary' rel='music icon' href='img/favicon.ico'><!--Css-->
+    <link rel='stylesheet' type='text/css' href='css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='css/jy.css?1.0.0'>
+    <link rel='stylesheet' type='text/css' href='css/plugs.min.css' media='all'>
+    <link rel='stylesheet' type='text/css' href='css/style.css' media='all'><!--js-->
+    <script src='js/jquery-2.0.3.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+    <script type='text/javascript'>
+        (function () {
+            window.JY = {
+                'root': '/',
+                'public': '/public',
+                'domains': {'home': '/', 'api': '/api', 'user': '/user', 'article': '/article', 'mobile': ''},
+                'deep': '/',
+                'model': ['2', 'html'],
+                'user_active_url': '/user/active.html'
+            }
+        })();
+    </script>
+    <link rel='stylesheet' href='css/layer.css?v=3.0.3303'
+          id='layuicss-skinlayercss'>
+</head>
+<body style=''><!--布局-->
+<div class='wide_layout relative w_xs_auto'>
+    <header class='header'><!--头顶部-->
+        <section class='h_top hidden-xs'>
+            <div class='container'>
+                <div class='row clearfix'>
+                    <div class='col-md-3 col-sm-4'><a href='/' class='pull-left logo mt_15'><img
+                            src='img/logo.jpg' alt='JYmusic'></a></div>
+                    <div class='col-md-4 col-sm-8 t_align_c'>
+                        <div class='search-box mt_15'>
+                            <form role='search' class='relative type_2' id='search_form' method='get'
+                                  action='/search.html?num=60'><input type='text' class='d_none' name='type' value='1'><input
+                                    type='text' class='full_width' name='name' placeholder='搜索'>
+                                <button class='search_button tr_all_hover' style='background-image: url(/img/search.jpg)'></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class='col-md-5 col-sm-8 t_align_c d_xs_none'>
+                        <ul class=' clearfix users_nav'>
+                            <li><img src='img/logo.jpg'>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!--头底部-->
+        <section class='h_bot_part'>
+            <div class='menu_wrap'>
+                <div class='container'>
+                    <div class='clearfix row'>
+                        <div class='col-xs-4 hidden-md hidden-lg hidden-sm'><a href='/'
+                                                                               class='pull-left logo p_vr_0'><img
+                                src='img/logo.jpg' alt='JYmusic'></a></div>
+                        <div class='col-sm-12 col-xs-8'>
+                            <nav role='navigation'>
+                                <div class='navbar-header'>
+                                    <button type='button' class='navbar-toggle collapsed bg_scheme_color mt_0'
+                                            data-toggle='collapse' data-target='#navbar' aria-expanded='false'
+                                            aria-controls='navbar'><span class='sr-only'>切换导航</span><span
+                                            class='icon-bar'></span><span class='icon-bar'></span><span
+                                            class='icon-bar'></span></button>
+                                </div>
+                                <div id='navbar' class='collapse navbar-collapse '>
+                                    <ul class='nav navbar-nav nav_menu full_width  relative'>
+                                        <li class='t-nav current'><a href='/' target='_self' class=''>
+                                            首页 </a></li>
+                                        <li class='t-nav '><a href='/album.html' target='_self' class=''>
+                                            专辑 </a></li>
+                                        <li class='t-nav '><a href='/genre.html' target='_self' class=''>
+                                            歌单管理 </a></li>
+                                        <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
+                                            歌曲排行 </a></li>
+                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
+                                            音乐资讯 </a></li>
+
+                                        <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
+                                                                                                    href='#'
+                                                                                                    class='pt_5 color_light bg_scheme_color'><span
+                                                class='d_inline_middle shop_icon'><i class='jy jy-like jy-2x'></i><span
+                                                class='count tr_delay_hover type_2 circle t_align_c'>10</span></span><b>每日推荐</b></a>
+                                            <div class='songs-day-hot top_arrow tr_all_hover '>
+                                                <div class=' sc_header'>每日推荐</div>
+                                                <ul class='products_list'>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1105.html'>李宗盛 - 山丘
+                                                                (Live)</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1105'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1106.html'>赵已然 - 再回首</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1106'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1107.html'>朴树 - 送别</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1107'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1093.html'>李志 -
+                                                                山阴路的夏天</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1093'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1094.html'>万晓利 - 老狗</a>
+                                                            </div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1094'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class='clearfix'>
+                                                            <div class='pull-left product_description'><a
+                                                                    class='mb_5 d_block text-ellipsis play_name'
+                                                                    target='_play' href='/music/1095.html'>谣乐队 -
+                                                                唱歌的孩子</a></div>
+                                                            <div class='pull-right f_size_big'><a
+                                                                    class='tr_delay_hover jp-play-me' data-id='1095'
+                                                                    href='javascript:;'><img src='img/play.jpg'></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header><!-- /头部 --><!-- 主体 -->
+    <link rel='stylesheet' type='text/css' href='css/swiper.min.css'>
+    <script src='js/swiper.jquery.min.js'></script>
+    <style>.swiper-container {
+        width: 1140px;
+        height: 360px;
+        margin-top: 15px;
+    }
+    .swiper-pagination-bullet {
+        width: 30px;
+        height: 4px;
+        border-radius: 0;
+        background: #000;
+        opacity: .2;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #e73c31;
+        opacity: 1;
+    }
+    </style>
+    <!--轮播  1140*360-->
+    <div class='swiper-container swiper-container-horizontal'>
+        <div class='swiper-wrapper' style='transform: translate3d(-2280px, 0px, 0px); transition-duration: 0ms;'>
+            <div class='swiper-slide swiper-slide-duplicate'
+                 data-swiper-slide-index='3' style='width: 1140px;'><a href='/album.html?id=19167'><img
+                    src='img/pic1.png'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-prev'
+                 data-swiper-slide-index='0' style='width: 1140px;'><a href='/album.html?id=80003734'><img
+                    src='img/pic2.png'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-active'
+                 data-swiper-slide-index='1' style='width: 1140px;'><a href='/album.html?id=18896'><img
+                    src='img/pic3.png'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-next'
+                 data-swiper-slide-index='2' style='width: 1140px;'><a href='/album.html?id=3056951'><img
+                    src='img/pic4.png'></a>
+            </div>
+            <div class='swiper-slide' data-swiper-slide-index='3'
+                 style='width: 1140px;'><a href='#'><img
+                    src='img/pic1.png'></a>
+            </div>
+            <div class='swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev'
+                data-swiper-slide-index='0' style='width: 1140px;'>
+                <a href='#'><img
+                        src='http://ugc.cdn.qianqian.com/yinyueren/pic/793db1cc912bc04acd15.png@w_1220,d_progressive'></a>
+            </div>
+        </div><!-- 如果需要分页器 -->
+        <div class='swiper-pagination swiper-pagination-bullets'><span class='swiper-pagination-bullet'></span><span
+                class='swiper-pagination-bullet swiper-pagination-bullet-active'></span><span
+                class='swiper-pagination-bullet'></span><span class='swiper-pagination-bullet'></span></div>
+        <!-- 如果需要导航按钮 -->
+        <div class='swiper-button-prev swiper-button-white'></div>
+        <div class='swiper-button-next swiper-button-white'></div>
+    </div>
+
+
+
+    <p style='position: fixed;bottom: 0; opacity :.01'>Powered by <a href='http://jyuu.cn'>JYmusic</a></p>
+    <div class='page_content_offset'>
+        <div class='container'>
+            <div class='row clearfix '>
+                <div class='col-sm-8'>
+                    <div class='new-title clearfix mb_15'><h2 class='pull-left jp-play-me'><img src='img/hot.jpg'>歌曲TOP12</h2>
+                        <ul class='pull-right tabs_nav mb_10' role='tablist'>
+                            <li class='active'><a class='tr_delay_hover' data-toggle='tab' role='tab'
+                                                  href='#new'>最新添加</a></li>
+                            <li><a class='tr_delay_hover' data-toggle='tab' role='tab' href='#hot'>热门试听</a></li>
+                            <li><a class='tr_delay_hover' data-toggle='tab' role='tab' href='#listens'>推荐单曲</a></li>
+                        </ul>
+                    </div>
+                    <div class='tab-content mb_15'>
+                        <div class='tab-pane fade' id='listens'>
+
+                        </div>
+
+                        <div class='tab-pane fade' id='hot'>
+
+                        </div>
+                        <div class='tab-pane fade in active' id='new'>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="album" class='col-sm-4'>
+                    <div class='clearfix new-title mb_15'><h2 class='pull-left'>推荐专辑</h2>
+                        <div class='more mb_10'><a href='/album.html'>更多&gt;&gt;</a></div>
+                    </div>
+                    <div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>
+                        <img class='s_animate animate_ftr animate_horizontal_finished' src='' ></a></div>
+                          <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>专辑名</a></h4>
+                            <p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>
+
+
+                </div>
+            </div>
+        </div>
+    </div><!-- /主体 --><!-- 底部 -->
+    <footer id='footer'>
+        <div class='container hidden-xs'>
+            <div class='row clearfix'>
+                <div class='col-sm-6'><h3>music音乐网站</h3>
+                    <p>
+                        music是李尚泽小组开发的一款音乐系统。程序完全免费，稳定，易于扩展且具有超强大负载能力，完全可以满足音乐、DJ、音乐分享、音乐资讯站等使用。</p>
+                </div>
+                <div class='col-sm-2'><h3>关于网站</h3>
+                    <ul class='vertical_list'>
+                        <li><a class='tr_delay_hover' href='#'>友情链接</a></li>
+                        <li><a class='tr_delay_hover' href='#'>联系我们</a></li>
+                        <li><a class='tr_delay_hover' href='#'>版权声明</a></li>
+                        <li><a class='tr_delay_hover' href='#'>关于music</a></li>
+                    </ul>
+                </div>
+                <div class='col-sm-2'><h3>帮助中心</h3>
+                    <ul class='vertical_list'>
+                        <li><a class='tr_delay_hover' href='#'>认证音乐人</a></li>
+                        <li><a class='tr_delay_hover' href='#'>反馈建议</a></li>
+                        <li><a class='tr_delay_hover' href='#'>常见问题</a></li>
+                        <li><a class='tr_delay_hover' href='#'>如何注册</a></li>
+                    </ul>
+                </div>
+                <div class='col-sm-2'><h3>联系我们</h3>
+                    <ul class='vertical_list'>
+                        <li><i class='jy jy-envelope pull-left'></i>1053593561@qq.com</li>
+                        <li><i class='jy jy-share-square pull-left'></i>QQ: 1053593561</li>
+                        <li><i class='jy jy-phone pull-left'></i>18888888889</li>
+                        <li><i class='jy jy-music pull-left'></i><a class='contact_e' href='#'>music音乐网</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class='row clearfix'><!--版权的部分 请务必保留版权 谢谢合作！-->
+                <div class='footer_bottom_part col-sm-6 '><p class='pull-left'>人才招聘中 </p></div>
+                <div class='col-sm-6 mb_10'><!--图标-->
+                    <ul class='clearfix horizontal_list social_icons pull-right'>
+                        <li class='html5 relative'><span class='tooltip tr_all_hover  '>五险一金</span><a
+                                class=' t_align_c tr_delay_hover ' href='javascript:;'>加</a>
+                        </li>
+                        <li class='css3 ml_5 relative'><span class='tooltip tr_all_hover  '>待遇从优</span><a
+                                class='  t_align_c tr_delay_hover' href='javascript:;'>入</a>
+                        </li>
+                        <li class='android ml_5 relative'><span class='tooltip tr_all_hover  '>带薪休假</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>我</a>
+                        </li>
+                        <li class='iPhone ml_5 relative'><span class='tooltip tr_all_hover  '>时间自由</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>们</a>
+                        </li>
+                        <li class='rss ml_5 relative'><span class='tooltip tr_all_hover  '>热爱音乐</span><a
+                                class='t_align_c tr_delay_hover' href='javascript:;'>吧</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!-- /底部 -->
+</div>
+
+<script type='text/javascript' src='js/jquery.jplayer.min.js'></script>
+<script type='text/javascript' src='js/jyplayer.js?1.01'></script>
+<script type='text/javascript' src='js/app.js?0.1'></script>
+<script type='text/javascript' src='js/plugs.min.js'></script>
+<script type='text/javascript' src='js/common.js?v=1.0'></script>
+<script src='js/layer.js'></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type : 'get',
+            dataType : 'json',
+            url : '/getlist?id=19723756',
+            success: function(rec){
+                var html = '';
+                var list = rec;
+
+
+                for(var i=0;i<12;i++){
+
+
+
+                    html += "<div class='mb_10 clearfix relative play_box'>" +
+                        "<div class='row clearfix song_list'>"+"<span class='col-sm-5 col-xs-8'>"+
+                        "<span class='ls_num ls_num_top'>"+(i+1)+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                        "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id="+list[i].singerId+"'>"+list[i].singerName+"</a></span>"+
+                        "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                        "<a                                                href='/album.json.html?id="+list[i].albumId+"'>"+list[i].albumName+
+                        "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                        "<a class='jp-play-me' target='_down'                                                href='/down/1105.html'>"+
+                        "播</a></span></div>"+
+                        "<hr class='l_hr'></div>";
+
+
+                };
+                console.log(html);
+                $("#listens").html(html);
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
+
+        $.ajax({
+            type : 'get',
+            dataType : 'json',
+            url : '/getlist?id=3779629',
+            success: function(rec){
+                var html = '';
+                var list = rec;
+
+
+                for(var i=0;i<12;i++){
+
+
+                    html += "<div class='mb_10 clearfix relative play_box'>" +
+                        "<div class='row clearfix song_list'>"+"<span class='col-sm-5 col-xs-8'>"+
+                        "<span class='ls_num ls_num_top'>"+(i+1)+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                        "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id="+list[i].singerId+"'>"+list[i].singerName+"</a></span>"+
+                        "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                        "<a                                                href='/list.html?id="+list[i].albumId+"'>"+list[i].albumName+
+                        "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                        "<a class='jp-play-me' target='_down'                                                href='/down/1105.html'>"+
+                        "播</a></span></div>"+
+                        "<hr class='l_hr'></div>";
+
+
+
+                };
+                console.log(html);
+                $("#hot").html(html);
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
+
+
+        $.ajax({
+            type : 'get',
+            dataType : 'json',
+            url : '/getlist?id=3778678',
+            success: function(rec){
+                var html = '';
+                var list = rec;
+
+
+                for(var i=0;i<12;i++){
+
+
+                    html += "<div class='mb_10 clearfix relative play_box'>" +
+                        "<div class='row clearfix song_list'>"+"<span class='col-sm-5 col-xs-8'>"+
+                        "<span class='ls_num ls_num_top'>"+(i+1)+"</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>"+list[i].songName+"</a></span>"+
+                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>"+
+                        "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id="+list[i].singerId+"'>"+list[i].singerName+"</a></span>"+
+                        "<span                                            class='col-sm-2 hidden-xs singer'>"+
+                        "<a                                                href='/list.html?id="+list[i].albumId+"'>"+list[i].albumName+
+                        "</a></span>"+"<span                                            class='col-sm-2 col-xs-2 ls_btns'>"+
+                        "<a class='jp-play-me' target='_down'                                                href='/down/1105.html'>"+
+                        "播</a></span></div>"+
+                        "<hr class='l_hr'></div>";
+
+
+
+                };
+                console.log(html);
+                $("#new").html(html);
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
+
+        // $.ajax({
+        //     type : 'get',
+        //     dataType : 'json',
+        //     url : '/getlist?id=19723756',
+        //     success: function(rec){
+        //
+        //         var list = rec;
+        //         var url1=list[0].songId;
+        //         var url2=list[1].songId;
+        //         var url3=list[2].songId;
+        //         var url4=list[3].songId;
+        //         var url5=list[4].songId;
+        //         var url6=list[5].songId;
+        //
+        //
+        //         $.ajax({
+        //             type : 'get',
+        //             dataType : 'json',
+        //             url : '/song?id='+url1,
+        //             success: function(rec2){
+        //
+        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
+        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
+        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[0].albumName+"</a></h4>"+
+        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
+        //
+        //
+        //                 $("#album").append(html);
+        //
+        //
+        //             },
+        //             error: function () {
+        //                 alert('错了');
+        //             }
+        //         });
+        //         $.ajax({
+        //             type : 'get',
+        //             dataType : 'json',
+        //             url : '/song?id='+url2,
+        //             success: function(rec2){
+        //
+        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
+        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
+        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[1].albumName+"</a></h4>"+
+        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
+        //
+        //
+        //                 $("#album").append(html);
+        //
+        //
+        //             },
+        //             error: function () {
+        //                 alert('错了');
+        //             }
+        //         });
+        //         $.ajax({
+        //             type : 'get',
+        //             dataType : 'json',
+        //             url : '/song?id='+url3,
+        //             success: function(rec2){
+        //
+        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
+        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
+        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[2].albumName+"</a></h4>"+
+        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
+        //
+        //
+        //                 $("#album").append(html);
+        //
+        //
+        //             },
+        //             error: function () {
+        //                 alert('错了');
+        //             }
+        //         });
+        //         $.ajax({
+        //             type : 'get',
+        //             dataType : 'json',
+        //             url : '/song?id='+url4,
+        //             success: function(rec2){
+        //
+        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
+        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
+        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[3].albumName+"</a></h4>"+
+        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
+        //
+        //
+        //                 $("#album").append(html);
+        //
+        //
+        //             },
+        //             error: function () {
+        //                 alert('错了');
+        //             }
+        //         });
+        //         $.ajax({
+        //             type : 'get',
+        //             dataType : 'json',
+        //             url : '/song?id='+url5,
+        //             success: function(rec2){
+        //
+        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
+        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
+        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[4].albumName+"</a></h4>"+
+        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
+        //
+        //
+        //                 $("#album").append(html);
+        //
+        //
+        //             },
+        //             error: function () {
+        //                 alert('错了');
+        //             }
+        //         });
+        //         $.ajax({
+        //             type : 'get',
+        //             dataType : 'json',
+        //             url : '/song?id='+url6,
+        //             success: function(rec2){
+        //
+        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
+        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
+        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[5].albumName+"</a></h4>"+
+        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
+        //
+        //
+        //                 $("#album").append(html);
+        //
+        //
+        //             },
+        //             error: function () {
+        //                 alert('错了');
+        //             }
+        //         });
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //     },
+        //     error: function () {
+        //         alert('错了');
+        //     }
+        // });
+
+
+        var mySwiper = new Swiper(".swiper-container", {
+            loop: true,
+            autoplay: 5000,
+            // 如果需要分页器
+            pagination: ".swiper-pagination",
+            // 如果需要前进后退按钮
+            nextButton: ".swiper-button-next",
+            prevButton: ".swiper-button-prev",
+        });
+
+    })
+</script>
+
+
+</body>
+</html>
+

@@ -88,6 +88,12 @@ public class MainController {
     @RequestMapping("song")
     @ResponseBody
     public String songURL(int id,HttpServletRequest request) {
+
+        return "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
+    }
+    @RequestMapping("sp")
+    @ResponseBody
+    public String songPic(int id,HttpServletRequest request) {
         String pic = null;
         try {
             pic = search.getPic(id);
@@ -95,7 +101,7 @@ public class MainController {
             mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
-        return "{\"song\":\"http://music.163.com/song/media/outer/url?id=" + id + ".mp3\",\"pic\":\"" + pic + "\"}";
+        return pic;
     }
 
     //传入专辑id返回专辑歌曲

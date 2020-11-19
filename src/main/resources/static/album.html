@@ -184,7 +184,7 @@
                 <section class="col-sm-8 ">
                     <div class="row clearfix">
                         <div class="col-sm-4">
-                            <div id="pic" class="photoframe a_cover"></div>
+                            <div id="pic" style="width: 200px;height: 200px" class="photoframe a_cover"></div>
                         </div>
                         <div class="col-sm-7"><hr><hr><hr><hr><hr><h1 id="name" class="mt_10"></h1><hr><hr><hr><hr><hr>
 
@@ -303,7 +303,23 @@
             id = 96777500;
         }
 
+        $.ajax({
+            type : 'get',
+            dataType : 'text',
+            url : '/sp?id='+id,
+            success: function(rec){
 
+
+                var html = '<img src="'+rec+'" class="tr_all_hover ">';
+
+                $("#pic").html(html);
+
+
+            },
+            error: function () {
+                alert('错了');
+            }
+        });
 
 
 
@@ -324,25 +340,8 @@
                 var name = list[0].albumName;
                 $("#name").html(name);
 
-                var id2=list[0].songId;
-                $.ajax({
-                    type : 'get',
-                    dataType : 'json',
-                    url : '/song?id='+id2,
-                    success: function(rec2){
 
 
-
-                        var html = '<img src="'+rec2.pic+'" class="tr_all_hover ">';
-
-                        $("#pic").html(html);
-
-
-                    },
-                    error: function () {
-                        alert('错了');
-                    }
-                });
 
                 if (currentPage==totalPage){
                     everylength = list.length;

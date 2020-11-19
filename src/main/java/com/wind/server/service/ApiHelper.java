@@ -19,7 +19,19 @@ import com.wind.server.entity.search.Songs;
 import com.wind.server.entity.singer.SingerSong;
 import com.wind.server.entity.singer.Song;
 import com.wind.server.tools.URLEncodTools;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.HttpContext;
+import org.hibernate.validator.internal.util.privilegedactions.GetMethod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,6 +46,7 @@ public class ApiHelper {
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
+        conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
         conn.connect();
         //获取输入流shinian
         InputStream in = conn.getInputStream();
@@ -61,7 +74,7 @@ public class ApiHelper {
         //连接
         try {
 
-
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper Search", e.toString());
@@ -92,6 +105,7 @@ public class ApiHelper {
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
         try {
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper search2", e.toString());
@@ -115,13 +129,13 @@ public class ApiHelper {
     public String getPic(int id) throws IOException {
 
 //        URL u = new URL("https://music.163.com/api/song/detail/?id=" + id + "&ids=[" + id + "]");
-        URL u = new URL("http://music.163.com/api/album/"+id);
+        URL u = new URL("http://music.163.com/api/album/" + id);
         System.err.println(u.toString());
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
         try {
-
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper getPic", e.toString());
@@ -150,7 +164,7 @@ public class ApiHelper {
         //连接
         try {
 
-
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper getAlbum", e.toString());
@@ -178,6 +192,7 @@ public class ApiHelper {
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
         try {
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper singer", e.toString());
@@ -202,10 +217,12 @@ public class ApiHelper {
     public ListResult list(long id) throws IOException {
 
         URL u = new URL("https://music.163.com/api/playlist/detail?id=" + id);
+
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接
         try {
+            conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper list(long id)", e.toString());
@@ -222,9 +239,11 @@ public class ApiHelper {
         }
         in.close();
         String Json = sb.toString();
+        System.err.println(Json);
         ListResult listResult = JSON.parseObject(Json, ListPack.class).getResult();
         return listResult;
     }
+
     //                     ___                _---ヘ
 //                    く__,.ヘヽ.　　　　  /　,ー､ 〉
 //            　　　　   　＼ ', !-─‐-i　/　
@@ -355,7 +374,7 @@ public class ApiHelper {
 
             Json = "{\"result\":" + Json + "}";
             Select select = JSON.parseObject(Json, Select.class);
-System.err.println(Json);
+            System.err.println(Json);
             return select.getResult().getAlbum().getPicURL();
         } catch (Exception e) {
             mainDao.errorCollection("ApiHelper editInfo", e.toString());

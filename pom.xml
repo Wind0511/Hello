@@ -14,14 +14,14 @@
     <name>Server</name>
     <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
-    <build>
-        <finalName>server</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
+<!--    <build>-->
+<!--        <finalName>server</finalName>-->
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>false</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
 <!--        <plugins>-->
 <!--            <plugin>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
@@ -65,13 +65,19 @@
 <!--                </configuration>-->
 <!--            </plugin>-->
 <!--        </plugins>-->
-    </build>
+<!--    </build>-->
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

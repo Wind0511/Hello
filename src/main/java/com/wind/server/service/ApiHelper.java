@@ -187,10 +187,10 @@ public class ApiHelper {
     //拿到歌手热歌前50
     public SingerSong singer(int id) throws IOException {
 
-        URL u = new URL("http://music.163.com/api/artist/" + id);
+        URL u = new URL("" + id);
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-        //连接
+        //连接http://music.163.com/api/artist/
         try {
             conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727");
             conn.connect();

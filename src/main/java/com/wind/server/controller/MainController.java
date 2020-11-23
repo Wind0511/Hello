@@ -40,7 +40,7 @@ public class MainController {
     public String list(int id) {
         return "";
     }
-//根据歌曲id获取歌词
+//这个是获取歌词
     @ResponseBody
     @RequestMapping("lrc")
     public String lrc(int id, HttpServletRequest request) {
@@ -84,13 +84,14 @@ public class MainController {
         return "ERROR";
     }
 
-    //传入歌曲id返回播放地址URL Json  Object {song,url(专辑封面)}
+    //这个是获取播放地址
     @RequestMapping("song")
     @ResponseBody
     public String songURL(int id,HttpServletRequest request) {
 
         return "http://music.163.com/song/media/outer/url?id=" + id + ".mp3";
     }
+    //这个是获取图片
     @RequestMapping("sp")
     @ResponseBody
     public String songPic(int id,HttpServletRequest request) {
@@ -111,7 +112,6 @@ public class MainController {
         try {
             return search.getAlbum(id);
         } catch (IOException e) {
-
             mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }
@@ -140,7 +140,6 @@ public class MainController {
         try {
             return search.list(search.list(i));
         } catch (IOException e) {
-
             mainDao.errorCollection(request.getRequestURI(),e.toString());
             e.printStackTrace();
         }

@@ -1,5 +1,5 @@
 <html lang="en" class="csstransforms csstransforms3d csstransitions"><!--<![endif]-->
-<head><title>音乐搜索 - JYmusic音乐管理系统-DJ音乐系统</title>
+<head><title>音乐搜索</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta content="telephone=no" name="format-detection">
@@ -84,8 +84,7 @@
                                             歌单管理 </a></li>
                                         <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
                                             歌曲排行 </a></li>
-                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
-                                            音乐资讯 </a></li>
+
                                         <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
                                                                                                     href='#'
                                                                                                     class='pt_5 color_light bg_scheme_color'><span
@@ -185,7 +184,7 @@
                     <div class="clearfix"><h3 id="about" class="pull-left pt_10"> 搜索结果 </h3>
                         <ul class="tabs_nav pull-right">
                             <li class="active"><a href="javascript:;" class="d_block ">歌曲</a></li>
-                            <li><a href="/search.html" data-type="3" class="d_block change-search">搜索相关专辑</a></li>
+
                         </ul>
                     </div>
                     <hr>
@@ -614,6 +613,12 @@
 
             $("#about").html("[ " + resul + " ]的相关音乐")
 
+            function f(list){
+                sessionStorage.setItem('slist', list);
+                window.location.href="/test1.html"
+            }
+
+
 
             $.ajax({
                 type: 'get',
@@ -654,7 +659,7 @@
                             "<span                                            class='col-sm-2 hidden-xs singer'>" +
                             "<a                                                href='/album.html?id=" + list[i].albumId + "'>" + list[i].albumName +
                             "</a></span>" + "<span                                            class='col-sm-2 col-xs-2 ls_btns'>" +
-                            "<a class='jp-play-me'  href='/down/1105.html'>" +
+                            "<a class='jp-play-me'  onclick='function f("+list+")  '>" +
                             "播</a></span></div>" +
                             "<hr class='l_hr'></div>";
 

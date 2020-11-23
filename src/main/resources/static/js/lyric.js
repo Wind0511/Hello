@@ -1,76 +1,49 @@
-(function (window) {
-    function Lyric(path) {
-        return new Lyric.prototype.init(path);
-    }
-    Lyric.prototype = {
-        constructor: Lyric,
-        init: function (path) {
-            this.path = path;
-        },
-        times: [],
-        lyrics: [],
-        index: -1,
-        loadLyric: function (callBack) {
-            var $this = this;
-            $.ajax({
-                url: $this.path,
-                dataType: "text",
-                success: function (data) {
-                    // console.log(data);
-                    $this.parseLyric(data);
-                    callBack();
-                },
-                error: function (e) {
-                    console.log(e);
-                }
-            });
-        },
-        parseLyric: function (data) {
-            var $this = this;
-            // 一定要清空上一首歌曲的歌词和时间
-            $this.times = [];
-            $this.lyrics = [];
-            var array = data.split("\n");
-            // console.log(array);
-            // [00:00.92]
-            var timeReg = /\[(\d*:\d*\.\d*)\]/
-            // 遍历取出每一条歌词
-            $.each(array, function (index, ele) {
-                // 处理歌词
-                var lrc = ele.split("]")[1];
-                // 排除空字符串(没有歌词的)
-                if(lrc.length == 1) return true;
-                $this.lyrics.push(lrc);
+function mainLyric(lyric) {
+	//格式化歌词
+	var lyrics = formatLyric(lyric);
 
-                // 处理时间
-                var res = timeReg.exec(ele);
-                // console.log(res);
-                if(res == null) return true;
-                var timeStr = res[1]; // 00:00.92
-                var res2 = timeStr.split(":");
-                var min = parseInt(res2[0]) * 60;
-                var sec = parseFloat(res2[1]);
-                var time = parseFloat(Number(min + sec).toFixed(2)) ;
-                $this.times.push(time);
-            });
-            // console.log($this.times + "");
-            // console.log($this.lyrics + "");
-        },
-        currentIndex: function (currentTime) {
-            // console.log(currentTime);
-            // 0.93 >= 0.92
-            // 4.8 >= 4.75
-            if(currentTime >= this.times[0]){
-                this.index++; // 0  1
-                this.times.shift(); // 删除数组最前面的一个元素
-            }
-            return this.index; // 1
-        }
-        /*
-        [6.4,23.59,26.16,29.33,34.27,36.9];
-        ["告白气球 - 周杰伦","词：方文山","曲：周杰伦","塞纳河畔 左岸的咖啡","我手一杯 品尝你的美","留下唇印的嘴","花店玫瑰 名字写错谁","告白气球 风吹到对街"]
-        */
-    }
-    Lyric.prototype.init.prototype = Lyric.prototype;
-    window.Lyric = Lyric;
-})(window);
+	//创建歌词
+	createLyric(lyrics);
+
+	$("#lrcBox").find(".lrc").eq(0).addClass("current");
+	
+	
+	//计算滚动距离
+	var minHeight=$("#lrcContainer").height()/2;
+	var scrollTop=0;
+	$("#lrcBox").find(".lrc").each(function(i,p){
+		scrollTop=p.offsetTop<=minHeight?0:p.offsetTop-minHeight;
+		p.dataset.scrollTop=scrollTop;
+	});
+	
+	$("#audio").on("timeupdate",function(){
+		var this_=this;
+		$("#lrcBox").find(".lrc").each(function(i,p){
+			if(Math.abs(this_.currentTime-p.dataset.timepoint)<1){
+				$(this).addClass("current").siblings().removeClass("current");
+				scrollLyric(i,p.dataset.scrollTop);
+			}
+		})		
+	})
+		
+	var curLine=-1;
+	function scrollLyric(i,scrollTop){
+		if(curLine!=i){
+			$("#lrcContainer").stop(true).animate({"scrollTop":scrollTop},300);
+			curLine=i;
+		}
+	}
+	
+}
+
+function createLyric(lyrics) {
+	$.each(lyrics, function(i, lyric) {
+		var p = document.createElement("p");
+		p.innerHTML = lyric.lrcstr;
+		p.className = "lrc";
+
+		p.dataset.timepoint = lyric.timepoint;
+		p.dataset.line = i;
+		$("#lrcBox").append(p);
+	});
+}

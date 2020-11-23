@@ -52,8 +52,7 @@
                 type: "POST",
                 data: pass,
                 success: function (res) {
-                    alert("success " + res)
-
+                    window.location="/index";
                 },
                 error: function (jqXHR) {
                     alert("ERROR:?name = " + jqXHR.status)
@@ -77,10 +76,10 @@
     <button style="width: 100px" onclick="mail()">发送邮件</button>
     <form class="register-form">
         <br>
-        <input id="pass" type="password" placeholder="password" name="pass" onblur="checkPass()"/>
+        <input id="pass" type="password" placeholder="password" name="pass"/>
         <p></p><br>
     </form>
-    <button onclick="check()">create</button>
+    <button onclick="check()">登入</button>
 
 </div>
 

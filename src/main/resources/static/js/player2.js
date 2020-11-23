@@ -29,7 +29,7 @@ $(function() {
 
 	$("#infoList_playlist").on("dblclick", "tr", function() {
 		curIndex = parseInt(this.dataset.index);
-		refeshDOM(curIndex);
+		refeshDOM2(curIndex);
 		playMusic(curIndex);
 	});
 	//音乐播放进度条缓冲

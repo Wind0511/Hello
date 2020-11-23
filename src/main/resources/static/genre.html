@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang='en' class='csstransforms csstransforms3d csstransitions'><!--<![endif]-->
-<head><title>JYmusic音乐管理系统-DJ音乐系统</title>
+<head><title>音乐播放系统</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
     <meta content='telephone=no' name='format-detection'>
@@ -85,8 +85,7 @@
                                             歌单管理 </a></li>
                                         <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
                                             歌曲排行 </a></li>
-                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
-                                            音乐资讯 </a></li>
+
 
                                         <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
                                                                                                     href='#'
@@ -180,7 +179,6 @@
             </div>
         </section>
     </header><!-- /头部 --><!-- 主体 -->
-
     <div class="page_content_offset">
         <div class="container">
             <div class="row clearfix">
@@ -189,17 +187,11 @@
                     <div class="sidebar_content">
                         <div class="clearfix s_cats">期待与您的合作！</div>
                     </div>
-
-
                     <h2 class="pt_10">新歌试听</h2>
                     <hr>
                     <div id="rank" class="sidebar_content">
-
-
                     </div>
                 </aside>
-
-
                 <!--右侧歌曲列表-->
                 <section id="list" class="col-sm-8">
 
@@ -266,24 +258,8 @@
     </div>
 </footer><!-- /底部 -->
 </div>
-
-
 <script type='text/javascript' src='js/common.js?v=1.0'></script>
-
-
 <script>
-
-    function del(id){
-        var pass=prompt("输入密码");
-        $.ajax({
-            type: 'get',
-            dataType: 'json',
-            url: '/del?id='+id+'&pass='+pass,
-            success :function (res) {
-                alert(res);
-            }
-    })}
-
     $.ajax({
         type: 'get',
         dataType: 'json',
@@ -291,27 +267,18 @@
         success: function (rec) {
             var html = '';
             var list = rec;
-
-
             for (var i = 0; i < 12; i++) {
-
-
                 html += "<div class='mb_10 clearfix relative play_box'> <div class='row clearfix song_list'><span class='col-sm-10 col-xs-8'>" +
-                    "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play' title='This Is Who We Are(Club Mix)' href='/music/1220.html'>" + list[i].songName + "</a></span>" +
-                    "<span   class='col-sm-2 col-xs-4 ls_btns'><a class='jp-play-me' data-id='1220'    href='javascript:;'>播</a></span>   </div>     <hr class='l_hr'>   </div>";
-
-
+                    "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/play-zyq.html?id=3779629'>" + list[i].songName + "</a></span>" +
+                    "<span   class='col-sm-2 col-xs-4 ls_btns'><a class='jp-play-me' data-id='1220'    href='/play-zyq.html?id=3779629'>播</a></span>   </div>     <hr class='l_hr'>   </div>";
             }
-            ;
             console.log(html);
             $("#rank").html(html);
-
         },
         error: function () {
             alert('错了');
         }
     });
-
 
     // 获取参数
     function request(paras) {
@@ -326,12 +293,10 @@
         if (typeof (returnValue) == "undefined") {
             return "1";
         } else {
-
             return returnValue;
         }
     }
-
-
+    var res;
     $.ajax({
         type: 'get',
         dataType: 'json',
@@ -339,39 +304,30 @@
         success: function (rec) {
             var html = "<div class='clearfix pt_10'><h3 class='pull-left'> 歌单列表</h3></div>                <hr class=''> <div class='clearfix mt_10 '>"
             var alllist = rec;
-
+            res=rec;
             //var pass = prompt("请输入管理员密码：");
             var num = alllist.length;
             var totalPage = parseInt(num / 20 + 1); //一共多少页
             var currentPage = parseInt(request("page"));//当前页码
             var everylength = currentPage * 20;
-
-
             if (currentPage == totalPage) {
                 everylength = alllist.length;
-
             }
-
-
             for (var i = (currentPage - 1) * 20; i < everylength; i++) {
-
-
                 html += "<div class='mb_10 clearfix relative play_box'>" +
                     "<div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'>" +
                     "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/local.html?id=" + alllist[i].id + "'>" + alllist[i].name + "</a></span>" +
-                    "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>" +
-                    "<a class='text-ellipsis singer' target='_sing'    href='#'>歌曲数量：" + "</a></span>" +
-                    "<span                                            class='col-sm-2 hidden-xs singer'>" +
-                    "<a                                                href='#'>" + alllist[i].searchInfos.length +
+                    "<span class='col-sm-3 col-xs-2 p_hr_0'>" +
+                    "<a class='text-ellipsis singer' target='_sing' href='#'>歌曲数量：" + "</a></span>" +
+                    "<span class='col-sm-2 hidden-xs singer'>" +
+                    "<a href='#'>" + alllist[i].searchInfos.length +
                     "</a></span>" + "<span     class='col-sm-2 col-xs-2 ls_btns'>" +
-                    "<a class='jp-play-me'  onclick='del("+alllist[i].id+")' >" +
+                    "<a class='jp-play-me'  onclick='del("+i+")' >" +
                     "删</a></span></div>" +
                     "<hr class='l_hr'></div>";
                 // href='/del?id=" + alllist[i].id + "&pass=" + pass + "
             }
             ;
-
-
             html += "<div class='row clearfix mb_5'><div class='col-sm-6'><span class='page_total'>共查询相关歌单【" + num + "】个</span></div><div class='col-sm-6 t_align_r'> <ul class='horizontal_list pull-right page_list'> <ul class='pagination'>"
 
             if (currentPage == 1) {
@@ -379,8 +335,6 @@
             } else {
                 html += "<li> <a href = '/genre.html?page=" + (currentPage + 1) + "'>«</a></li>"
             }
-
-
             for (var i = 0; i < num / 20; i++) {
 
                 if (i + 1 == currentPage) {
@@ -396,12 +350,8 @@
             } else {
                 html += "<li> <a href = '/genre.html?page=" + (currentPage + 1) + "'>»</a></li>"
             }
-
 //                        html += "<li class='disabled'><span>«</span></li> <li class = 'active' > <span > 1</span></li> <li> <a href = '/search/page/2.html?type=1&amp;keys=h'>2</a></li> <li> <a href = '/search/page/3.html?type=1&amp;keys=h'>3</a></li> <li> <a href = '/search/page/4.html?type=1&amp;keys=h'>4</a></li> <li> <a href = '/search/page/5.html?type=1&amp;keys=h'>5</a></li> <li class = 'disabled' > <span>...</span></li> <li><a href='/search/page/14.html?type=1&amp;keys=h'>14</a></li> <li><a href='/search/page/2.html?type=1&amp;keys=h'>»</a></li>"
-
             html += " </ul> </ul> </div> </div>"
-
-
             $("#list").html(html);
 
         },
@@ -409,8 +359,18 @@
             alert('错了');
         }
     });
+
+    function del(i) {
+        var pass = prompt("输入密码");
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: '/del?id=' + res[i].id + '&pass=' + pass,
+            success: function (rec) {
+                alert(rec);
+            }
+        })
+    }
 </script>
-
-
 </body>
 </html>

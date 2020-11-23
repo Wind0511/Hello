@@ -14,6 +14,7 @@
     <name>Server</name>
     <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
+
 <!--    <build>-->
 <!--        <finalName>server</finalName>-->
 <!--        <resources>-->
@@ -159,6 +160,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
     </build>
 
 

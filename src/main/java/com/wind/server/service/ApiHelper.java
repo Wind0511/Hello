@@ -152,6 +152,7 @@ public class ApiHelper {
         }
         in.close();
         String Json = sb.toString();
+        System.out.println("inform:"+Json);
         return editInfo(Json);
     }
 
@@ -187,7 +188,7 @@ public class ApiHelper {
     //拿到歌手热歌前50
     public SingerSong singer(int id) throws IOException {
 
-        URL u = new URL("" + id);
+        URL u = new URL("http://music.163.com/api/artist/" + id);
         //获取连接对象
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         //连接http://music.163.com/api/artist/
@@ -209,7 +210,7 @@ public class ApiHelper {
         }
         in.close();
         String Json = sb.toString();
-
+        System.err.println(Json);
         return JSON.parseObject(Json, SingerSong.class);
     }
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="csstransforms csstransforms3d csstransitions"><!--<![endif]-->
-<head><title>人气排行 - 音乐排行 - JYmusic音乐管理系统-DJ音乐系统</title>
+<head><title>排行榜</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
     <meta content='telephone=no' name='format-detection'>
@@ -85,8 +85,7 @@
                                             歌单管理 </a></li>
                                         <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
                                             歌曲排行 </a></li>
-                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
-                                            音乐资讯 </a></li>
+
 
                                         <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
                                                                                                     href='#'
@@ -281,7 +280,7 @@
             dataType: 'json',
             url: '/getlist?id=19723756',
             success: function (rec) {
-                var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐飙升榜</h2> <div class="more mb_10"><a href="/ranks/down.html">查看完整榜单</a></div> </div> <hr class="mb_15">';
+                var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐飙升榜</h2> <div class="more mb_10"><a href="/list.html?id=19723756">查看完整榜单</a></div> </div> <hr class="mb_15">';
                 var list = rec;
 
 
@@ -290,13 +289,13 @@
 
                     if (i < 3) {
                         html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
-                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
+                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/test.html?id=19723756">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="/play-zyq.html?id=19723756">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     } else {
                         html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
-                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
+                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/test.html?id=19723756">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="/play-zyq.html?id=19723756">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     }
 
@@ -317,7 +316,7 @@
             dataType: 'json',
             url: '/getlist?id=3779629',
             success: function (rec) {
-                var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐新歌榜</h2> <div class="more mb_10"><a href="/ranks/down.html">查看完整榜单</a></div> </div> <hr class="mb_15">';
+                var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐新歌榜</h2> <div class="more mb_10"><a href="/list.html?id=3779629">查看完整榜单</a></div> </div> <hr class="mb_15">';
                 var list = rec;
 
 
@@ -326,13 +325,13 @@
 
                     if (i < 3) {
                         html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
-                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
+                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/test.html?id=3779629">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="/play-zyq.html?id=3779629">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     } else {
                         html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
-                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
+                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/test.html?id=3779629">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="/play-zyq.html?id=3779629">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     }
 
@@ -354,7 +353,7 @@
             dataType: 'json',
             url: '/getlist?id=3778678',
             success: function (rec) {
-                var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐热歌榜</h2> <div class="more mb_10"><a href="/ranks/down.html">查看完整榜单</a></div> </div> <hr class="mb_15">';
+                var html = '<div class="clearfix new-title"><h2 class="pull-left">云音乐热歌榜</h2> <div class="more mb_10"><a href="/list.html?id=3778678">查看完整榜单</a></div> </div> <hr class="mb_15">';
                 var list = rec;
 
 
@@ -363,13 +362,13 @@
 
                     if (i < 3) {
                         html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
-                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
+                            '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/test.html?id=3778678">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="/play-zyq.html?id=3778678">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     } else {
                         html += '<div class="mb_10 clearfix relative play_box"><div class="row clearfix song_list"><span class="col-sm-8">' +
-                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/music/2.html">' + list[i].songName + '</a></span>' +
-                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="javascript:;">播</a></span></div>' +
+                            '<span class="ls_num ">' + (i + 1) + '</span><a class="text-ellipsis" target="_play"  href="/test.html?id=3778678">' + list[i].songName + '</a></span>' +
+                            '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="2" href="/play-zyq.html?id=3778678">播</a></span></div>' +
                             '<hr class="l_hr"></div>';
                     }
 

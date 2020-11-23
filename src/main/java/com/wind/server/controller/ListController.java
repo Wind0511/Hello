@@ -56,15 +56,30 @@ public class ListController {
     //mongoDB存储歌单 打包成SaveList形式的JSON然后转到后端 其中id不填
     @ResponseBody
     @RequestMapping("save")
-    public String save(String json) {
-        System.out.println(json);
+    public String save(String json,HttpServletRequest request) {
+//        System.out.println(json);
         Md5String md5String = new Md5String();
-        SaveList s = JSON.parseObject(json, SaveList.class);
-        s.setPass(md5String.getMd5(s.getPass()));
-        s.setId(UUID.randomUUID().toString());
-        s.setTime(System.currentTimeMillis());
-        mongoTemplate.insert(s, "music");
-        return "success";
+//        SaveList s = JSON.parseObject(json, SaveList.class);
+//        s.setPass(md5String.getMd5(s.getPass()));
+//        s.setId(UUID.randomUUID().toString());
+//        s.setTime(System.currentTimeMillis());
+//        mongoTemplate.insert(s, "music");
+//        return "success";
+        SaveList saveList = new SaveList();
+        saveList.setPass(md5String.getMd5(json));
+        HttpSession session = request.getSession();
+        List<SearchInfo> searchInfos = (JSON.parseArray((String) session.getAttribute("songs"),SearchInfo.class));
+        saveList.setName((String) session.getAttribute("name"));
+        saveList.setInform((String) session.getAttribute("inform"));
+        saveList.setId(UUID.randomUUID().toString());
+        saveList.setSearchInfos(searchInfos);
+        saveList.setTime(System.currentTimeMillis());try {
+            mongoTemplate.insert(saveList, "music");
+            return "true";
+        }catch (Exception e){
+            mainDao.errorCollection(request.getRequestURI(), "saveError" + e.toString());
+            return "error";
+        }
     }
 
     //删除歌单 返回值是删除记录的个数 如果是0就是密码错误如果不是0那就是删除成功 需要歌单名和密码

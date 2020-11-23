@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang='en' class='csstransforms csstransforms3d csstransitions'><!--<![endif]-->
-<head><title>JYmusic音乐管理系统-DJ音乐系统</title>
+<head><title>音乐播放系统</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
     <meta content='telephone=no' name='format-detection'>
@@ -85,8 +85,7 @@
                                             歌单管理 </a></li>
                                         <li class='t-nav '><a href='/ranks.html' target='_self' class=''>
                                             歌曲排行 </a></li>
-                                        <li class='t-nav '><a href='/article.html' target='_self' class=''>
-                                            音乐资讯 </a></li>
+
 
                                         <li class='relative hidden-sm hidden-xs' id='top_button'><a role='button'
                                                                                                     href='#'
@@ -339,7 +338,7 @@
                                  src='http://p2.music.126.net/ilhSwYuf1t3_vVu5eU5Pnw==/109951165434590354.jpg'></a>
                         </div>
                         <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a
-                                href='/album.html?id=97772220' target='_album'>蓝色土耳其</a></h4>
+                                href='/album.html?id=97772220' target='_album'>完美人生</a></h4>
                             <p class='small'>浏览</p>
                             <p><a class='ml_10' href='/album.html?id=97772220' target='_album'>详细</a></p></div>
                     </div>
@@ -413,6 +412,33 @@
 
 
 <script>
+
+    // // 保存数据到sessionStorage
+    // sessionStorage.setItem('key', 'value');
+    //
+    // // 从sessionStorage获取数据
+    // var data = sessionStorage.getItem('key');
+    //
+    // // 从sessionStorage删除保存的数据
+    // sessionStorage.removeItem('key');
+    //
+    // // 从sessionStorage删除所有保存的数据
+    // sessionStorage.clear();
+
+
+    // 保存数据到sessionStorage
+    sessionStorage.setItem('inform', 'value');
+    sessionStorage.setItem('name', 'value');
+
+    // 从sessionStorage获取数据
+    // var data = sessionStorage.getItem('key');
+
+    // 从sessionStorage删除保存的数据
+    // sessionStorage.removeItem('key');
+
+    // 从sessionStorage删除所有保存的数据
+    sessionStorage.clear();
+
     $(document).ready(function () {
 
         $.ajax({
@@ -422,24 +448,18 @@
             success: function (rec) {
                 var html = '';
                 var list = rec;
-
-
                 for (var i = 0; i < 12; i++) {
-
-
                     html += "<div class='mb_10 clearfix relative play_box'>" +
                         "<div class='row clearfix song_list'>" + "<span class='col-sm-5 col-xs-8'>" +
-                        "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>" + list[i].songName + "</a></span>" +
+                        "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/play-zyq.html?id=19723756'>" + list[i].songName + "</a></span>" +
                         "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>" +
                         "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id=" + list[i].singerId + "'>" + list[i].singerName + "</a></span>" +
                         "<span                                            class='col-sm-2 hidden-xs singer'>" +
                         "<a                                                href='/album.html?id=" + list[i].albumId + "'>" + list[i].albumName +
                         "</a></span>" + "<span                                            class='col-sm-2 col-xs-2 ls_btns'>" +
-                        "<a class='jp-play-me' target='_down'                                                href='/down/1105.html'>" +
+                        "<a class='jp-play-me' target='_down'                                                href='/play-zyq.html?id=19723756'>" +
                         "播</a></span></div>" +
                         "<hr class='l_hr'></div>";
-
-
                 }
                 ;
                 console.log(html);
@@ -458,24 +478,18 @@
             success: function (rec) {
                 var html = '';
                 var list = rec;
-
-
                 for (var i = 0; i < 12; i++) {
-
-
                     html += "<div class='mb_10 clearfix relative play_box'>" +
                         "<div class='row clearfix song_list'>" + "<span class='col-sm-5 col-xs-8'>" +
-                        "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>" + list[i].songName + "</a></span>" +
+                        "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/play-zyq.html?id=3779629'>" + list[i].songName + "</a></span>" +
                         "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>" +
                         "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id=" + list[i].singerId + "'>" + list[i].singerName + "</a></span>" +
                         "<span                                            class='col-sm-2 hidden-xs singer'>" +
                         "<a                                                href='/album.html?id=" + list[i].albumId + "'>" + list[i].albumName +
                         "</a></span>" + "<span                                            class='col-sm-2 col-xs-2 ls_btns'>" +
-                        "<a class='jp-play-me' target='_down'                                                href='/down/1105.html'>" +
+                        "<a class='jp-play-me' target='_down'                                                href='/play-zyq.html?id=3779629'>" +
                         "播</a></span></div>" +
                         "<hr class='l_hr'></div>";
-
-
                 }
                 ;
                 console.log(html);
@@ -502,180 +516,28 @@
 
                     html += "<div class='mb_10 clearfix relative play_box'>" +
                         "<div class='row clearfix song_list'>" + "<span class='col-sm-5 col-xs-8'>" +
-                        "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>" + list[i].songName + "</a></span>" +
-                        "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>" +
+                        "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/play-zyq.html?id=3778678'>" + list[i].songName + "</a></span>" +
+                        "<span   class='col-sm-3 col-xs-2 p_hr_0'>" +
                         "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id=" + list[i].singerId + "'>" + list[i].singerName + "</a></span>" +
-                        "<span                                            class='col-sm-2 hidden-xs singer'>" +
-                        "<a                                                href='/album.html?id=" + list[i].albumId + "'>" + list[i].albumName +
-                        "</a></span>" + "<span                                            class='col-sm-2 col-xs-2 ls_btns'>" +
-                        "<a class='jp-play-me' target='_down'                                                href='/down/1105.html'>" +
+                        "<span  class='col-sm-2 hidden-xs singer'>" +
+                        "<a  href='/album.html?id=" + list[i].albumId + "'>" + list[i].albumName +
+                        "</a></span>" + "<span   class='col-sm-2 col-xs-2 ls_btns'>" +
+                        "<a class='jp-play-me' target='_down' onclick=''  href='/play-zyq.html?id=3778678'>" +
                         "播</a></span></div>" +
                         "<hr class='l_hr'></div>";
-
-
                 }
                 ;
                 console.log(html);
                 $("#new").html(html);
-
+inform = rec;
             },
             error: function () {
                 alert('错了');
             }
         });
 
-        // $.ajax({
-        //     type : 'get',
-        //     dataType : 'json',
-        //     url : '/getlist?id=19723756',
-        //     success: function(rec){
-        //
-        //         var list = rec;
-        //         var url1=list[0].songId;
-        //         var url2=list[1].songId;
-        //         var url3=list[2].songId;
-        //         var url4=list[3].songId;
-        //         var url5=list[4].songId;
-        //         var url6=list[5].songId;
-        //
-        //
-        //         $.ajax({
-        //             type : 'get',
-        //             dataType : 'json',
-        //             url : '/song?id='+url1,
-        //             success: function(rec2){
-        //
-        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
-        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
-        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[0].albumName+"</a></h4>"+
-        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
-        //
-        //
-        //                 $("#album").append(html);
-        //
-        //
-        //             },
-        //             error: function () {
-        //                 alert('错了');
-        //             }
-        //         });
-        //         $.ajax({
-        //             type : 'get',
-        //             dataType : 'json',
-        //             url : '/song?id='+url2,
-        //             success: function(rec2){
-        //
-        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
-        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
-        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[1].albumName+"</a></h4>"+
-        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
-        //
-        //
-        //                 $("#album").append(html);
-        //
-        //
-        //             },
-        //             error: function () {
-        //                 alert('错了');
-        //             }
-        //         });
-        //         $.ajax({
-        //             type : 'get',
-        //             dataType : 'json',
-        //             url : '/song?id='+url3,
-        //             success: function(rec2){
-        //
-        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
-        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
-        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[2].albumName+"</a></h4>"+
-        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
-        //
-        //
-        //                 $("#album").append(html);
-        //
-        //
-        //             },
-        //             error: function () {
-        //                 alert('错了');
-        //             }
-        //         });
-        //         $.ajax({
-        //             type : 'get',
-        //             dataType : 'json',
-        //             url : '/song?id='+url4,
-        //             success: function(rec2){
-        //
-        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
-        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
-        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[3].albumName+"</a></h4>"+
-        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
-        //
-        //
-        //                 $("#album").append(html);
-        //
-        //
-        //             },
-        //             error: function () {
-        //                 alert('错了');
-        //             }
-        //         });
-        //         $.ajax({
-        //             type : 'get',
-        //             dataType : 'json',
-        //             url : '/song?id='+url5,
-        //             success: function(rec2){
-        //
-        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
-        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
-        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[4].albumName+"</a></h4>"+
-        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
-        //
-        //
-        //                 $("#album").append(html);
-        //
-        //
-        //             },
-        //             error: function () {
-        //                 alert('错了');
-        //             }
-        //         });
-        //         $.ajax({
-        //             type : 'get',
-        //             dataType : 'json',
-        //             url : '/song?id='+url6,
-        //             success: function(rec2){
-        //
-        //                 html = "<div class='clearfix row'><div class='col-sm-4 col-xs-5'><a href='/album/10.html' target='_album'  class='pull-left rca_cover'>"+
-        //                     "<img class='s_animate animate_ftr animate_horizontal_finished' src='"+rec2.pic+"' ></a></div>"+
-        //                     "  <div class='col-sm-8 col-xs-7 pl_0'><h4 class='mb_5 mt_5 text-ellipsis'><a href='/album/10.html' target='_album'>"+rec[5].albumName+"</a></h4>"+
-        //                     "<p class='small'>浏览</p> <p> <a class='ml_10' href='/album/10.html' target='_album'>详细</a></p></div></div><hr>";
-        //
-        //
-        //                 $("#album").append(html);
-        //
-        //
-        //             },
-        //             error: function () {
-        //                 alert('错了');
-        //             }
-        //         });
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //     },
-        //     error: function () {
-        //         alert('错了');
-        //     }
-        // });
+
+
 
 
         var mySwiper = new Swiper(".swiper-container", {

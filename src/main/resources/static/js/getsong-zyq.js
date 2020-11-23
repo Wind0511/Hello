@@ -1,28 +1,30 @@
 $(document).ready(function () {
+    var data1 = sessionStorage.getItem("singerid");
+    var data2 = sessionStorage.getItem("songid");
+    var data3 = sessionStorage.getItem("songname");
+    var data4 = sessionStorage.getItem("singername");
+    var data5 = sessionStorage.getItem("albumid");
+    var data6 = sessionStorage.getItem("albumiame");
     sessionStorage.clear();
-    var data = sessionStorage.getItem('slist');
-    // $.ajax({
-    //     type: 'get',
-    //     dataType: 'json',
-    //     url: '/album?id='+request("id"),
-    //
-    //     success:
-    //         function (data) {
-    //             console.log(data);
-    //
-    //
-    //
-    //             initalbum(data);
-    //             refeshDOM1();
-    //
-    //             var songTotals = data.length;
-    //             localStorage.setItem("songTotals", songTotals);
-    //
-    //         },
-    //     error: function () {
-    //         alert('错了1');
-    //     }
-    // });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/album?id='+data5,
+
+        success:
+            function (data) {
+
+                initsong(data1,data2,data3,data4,data5,data6);
+                refeshDOM2();
+
+                var songTotals = data.length;
+                localStorage.setItem("songTotals", songTotals);
+
+            },
+        error: function () {
+            alert('错了1');
+        }
+    });
 
     function refeshDOM2() {
 
@@ -49,7 +51,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'get',
             dataType: 'json',
-            url: '/lrc?id=' + firstTR.dataset.id,
+            url: '/lrc?id=' + data2,
             success:
                 function (data) {
 
@@ -65,10 +67,10 @@ $(document).ready(function () {
     $.ajax({
         type: 'get',
         dataType: 'text',
-        url: '/sp?id=' + data.albumId,
+        url: '/sp?id=' + data5,
         success:
             function (data) {
-                //alert(data)
+
                 a=data;
             },
         error: function () {
@@ -79,21 +81,21 @@ $(document).ready(function () {
 
 
 
-    function initalbum(data) {
+    function initsong(data1,data2,data3,data4,data5,data6) {
 
         var num, name,
-            artistName, album, tr;
-        $.each(data, function (index, track) {
+            artistName, album, tr,index;
+        // $.each(data1,data2,data3,data4,data5,data6, function (index) {
             num = (index + 1 < 100) ? "0" + (index + 1) : index + 1;
-            name = track.songName;
-            artistName = track.singerName;
-            album = track.albumName;
-            albumId = track.albumId;
+            name = data3;
+            artistName = data4;
+            album = data6;
+            albumId = data5;
 
             tr = document.createElement("tr");
-            tr.dataset.id = track.songId;
+            tr.dataset.id = data2;
             tr.dataset.index = index;
-            tr.dataset.mp3url = "http://music.163.com/song/media/outer/url?id=" + track.songId + ".mp3"
+            tr.dataset.mp3url = "http://music.163.com/song/media/outer/url?id=" + data2 + ".mp3"
             //tr.dataset.albumId = track.albumId;
             tr.dataset.name = name;
             tr.dataset.artistName = artistName;
@@ -107,10 +109,10 @@ $(document).ready(function () {
                 '<td>' + name + '</td>' +
                 '<td>' + artistName + '</td>' +
                 '<td>' + album + '</td>' +
-                '<td>' + 'xx' + '</td>';
+                '<td>' + '</td>';
 
             $("#infoList_playlist").append(tr);
-        });
+        // });
 
     }
 
@@ -155,7 +157,7 @@ function refeshDOM2(i) {
     $.ajax({
         type: 'get',
         dataType: 'json',
-        url: '/lrc?id=' + firstTR.dataset.id,
+        url: '/lrc?id=' + data2,
         success:
             function (data) {
 

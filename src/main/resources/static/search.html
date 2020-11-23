@@ -613,10 +613,7 @@
 
             $("#about").html("[ " + resul + " ]的相关音乐")
 
-            function f(list){
-                sessionStorage.setItem('slist', list);
-                window.location.href="/test1.html"
-            }
+
 
 
 
@@ -649,22 +646,30 @@
 
 
                     for (var i = (currentPage - 1) * 10; i < everylength; i++) {
+                        sessionStorage.setItem("singerid",list[i].singerId);
+                        sessionStorage.setItem("songid",list[i].songId);
+                        sessionStorage.setItem("songname",list[i].songName);
+                        sessionStorage.setItem("singername",list[i].singerName);
+                        sessionStorage.setItem("albumid",list[i].albumId);
+                        sessionStorage.setItem("albumiame",list[i].albumName);
+
+
 
 
                         html += "<div class='mb_10 clearfix relative play_box'>" +
                             "<div class='row clearfix song_list'><span class='col-sm-5 col-xs-8'>" +
-                            "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/music/1105.html'>" + list[i].songName + "</a></span>" +
+                            "<span class='ls_num ls_num_top'>" + (i + 1) + "</span><a class='text-ellipsis' target='_play'  href='/test1.html'>" + list[i].songName + "</a></span>" +
                             "<span                                            class='col-sm-3 col-xs-2 p_hr_0'>" +
                             "<a class='text-ellipsis singer' target='_sing'    href='/artist.html?id=" + list[i].singerId + "'>" + list[i].singerName + "</a></span>" +
                             "<span                                            class='col-sm-2 hidden-xs singer'>" +
                             "<a                                                href='/album.html?id=" + list[i].albumId + "'>" + list[i].albumName +
                             "</a></span>" + "<span                                            class='col-sm-2 col-xs-2 ls_btns'>" +
-                            "<a class='jp-play-me'  onclick='function f("+list+")  '>" +
+                            "<a class='jp-play-me'  href='/test1.html'  '>" +
                             "播</a></span></div>" +
                             "<hr class='l_hr'></div>";
 
-                    }
-                    ;
+                    };
+
 
 
                     html += "<div class='row clearfix mb_5'><div class='col-sm-6'><span class='page_total'>共查询相关歌曲【" + num + "】个</span></div><div class='col-sm-6 t_align_r'> <ul class='horizontal_list pull-right page_list'> <ul class='pagination'>"

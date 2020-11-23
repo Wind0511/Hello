@@ -335,7 +335,19 @@
             dataType: 'json',
             url: '/album?id=' + id,
             success: function (rec) {
-
+                function fun(list) {
+                    sessionStorage.setItem("inform",prompt("请输入预留信息"));
+                    sessionStorage.setItem("name",prompt("请输入歌单名称"));
+                    sessionStorage.setItem("songs",list);
+                    var pass = prompt("请输入密码")
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: '/save?pass='+pass,
+                        success: function (rec) {
+                            alert(1)
+                        }})
+                }
 
                 var list = rec;
                 var html = '';
@@ -357,7 +369,7 @@
                     html += '<div class="mb_10 clearfix relative play_box"> <div class="row clearfix song_list"><span class="col-sm-5 col-xs-8">' +
                         '<span class="ls_num ls_num_top">' + (i + 1) + '</span><a class="text-ellipsis" target="_play" href="/test.html?id='+list[i].albumId+'">' + list[i].songName + '</a></span>' +
                         '<span class="col-sm-3 col-xs-2 p_hr_0"><a class="text-ellipsis singer" target="_sing" href="/artist.html?id='+list[i].singerId+'">' + list[i].singerName + '</a></span>' +
-                        '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="221"  href="/test.html?id='+list[i].albumId+'">播</a></span>   </div> </div>'
+                        '<span class="col-sm-4 ls_btns"><a class="jp-play-me" data-id="221"  onclick="fun('+list[i]+')">添</a> <a class="jp-play-me" data-id="221"  href="/test.html?id='+list[i].albumId+'">播</a></span> </div> </div>'
 
                 }
 
